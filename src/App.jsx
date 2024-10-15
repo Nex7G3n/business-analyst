@@ -3,13 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Balance_ratios from  './components/Balance_Ratios'
+import News from  './components/News'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <Balance_ratios />
+      <News />
     </>
   )
 }
