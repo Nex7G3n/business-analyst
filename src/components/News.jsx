@@ -52,8 +52,8 @@ function News() {
   };
 
   return (
-    <div className="news-container">
-      <h2>Últimas noticias sobre Finanzas</h2>
+    <div>
+      <h2 className="text-2xl">Últimas noticias sobre Finanzas</h2>
 
       <div className='search-container'>
         <i className='fa fa-search search-icon fa-lg'></i>
