@@ -1,16 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Balance_ratios from  './components/Balance_Ratios'
 import News from  './components/News'
+import { Search } from './components/Search'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <News />
+      <Search />
+      <Balance_ratios />
     </>
   )
 }
