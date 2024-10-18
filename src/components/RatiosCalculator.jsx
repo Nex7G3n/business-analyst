@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useState } from "react";
 import { calculateRatios } from "@/utils/calculator";
+import FinancialPieChart from "./Torta";
 
 export function RatiosCalculator() {
     const [activoCorriente, setActivoCorriente] = useState('');
@@ -84,6 +85,14 @@ export function RatiosCalculator() {
                     <p>Ratio de Endeudamiento: {ratios.ratioEndeudamiento}</p>
                     <p>ROE (Rentabilidad sobre el Capital): {ratios.roe}</p>
                     <p>ROA (Rentabilidad sobre el Activo): {ratios.roa}</p>
+                    <FinancialPieChart
+                      activoCorriente={activoCorriente}
+                      pasivoCorriente={pasivoCorriente}
+                      totalPasivo={totalPasivo}
+                      totalActivo={totalActivo}
+                      beneficioNeto={beneficioNeto}
+                      capitalPropio={capitalPropio}
+                    />
                 </div>
             )}
       </DialogContent>

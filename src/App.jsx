@@ -7,6 +7,7 @@ import { Search } from '@/components/Search';
 import { ChatGpt } from '@/components/ChatGpt';
 import { Actions } from '@/components/Actions';
 import { RatiosCalculator } from '@/components/RatiosCalculator'
+import FinancialPieChart from './components/Torta';
 
 function App() {
   const [symbol, setSymbol] = useState('');
