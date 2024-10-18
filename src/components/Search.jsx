@@ -5,7 +5,7 @@ import axios from 'axios';
 import { balanceResponse } from '@/data/balanceResponse'
 import { earningsResponse } from '@/data/earningsResponse'
 import { overviewResponse } from '@/data/overviewResponse'
-
+import { actionsResponse }  from '@/data/actionsResponse'
 
 export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setActions }) => {
     const apiKey = '  ';
@@ -165,16 +165,16 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
     }
   
     async function getActions(symbol) {
-      console.log('Símbolo:', symbol);
       const apiKey_actions = 'DSRMZ2S6ADA4FD9B';
 
       try {
-        const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey_actions}`);
-        const result = await response.json();
-  
+        // const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey_actions}`);
+        // const result = await response.json();
+        const result = actionsResponse;
         if (result['Error Message']) {
           setActions(null);
         } else {
+          console.log('Datos de acciones:', result);
           const actions = Object.entries(result["Time Series (Daily)"]).map(([date, values]) => ({
             date: date,
             desktop: parseFloat(values["1. open"]), // open
@@ -184,7 +184,7 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
             low: parseFloat(values["3. low"]),
             close: parseFloat(values["4. close"]),
             volume: parseInt(values["5. volume"]),
-          }));  
+          }));
 
           setActions(actions);
         }
