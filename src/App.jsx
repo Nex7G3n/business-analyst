@@ -3,6 +3,7 @@ import './App.css'
 import Balance_ratios from  './components/Balance_Ratios'
 import News from  './components/News'
 import { Search } from './components/Search'
+import { ChatGpt } from './components/ChatGpt'
 
 function App() {
   const [symbol, setSymbol] = useState('');
@@ -15,6 +16,7 @@ function App() {
     <>
       <Search symbol={symbol} setSymbol={setSymbol} setBalance={setBalance} setRatios={setRatios} setNews={setNews} setActions={setActions}/>
       <Balance_ratios balance={balance} ratios={ratios}/>
+      <ChatGpt actions={actions} news={news} ratios={ratios} balance={balance} />
       <News news={news}/>
     </>
   )
