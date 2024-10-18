@@ -26,13 +26,13 @@ function App() {
         />
 
       {/* Balance ratios */}
-      <div className="border p-4 rounded-md shadow-sm">
+      <div className="border p-4 rounded-xl shadow-sm">
         <Balance_ratios balance={balance} ratios={ratios} />
       </div>
 
       {/* ChatGpt y Actions alineados horizontalmente */}
       <div className="flex space-x-6"> {/* Espaciado horizontal entre los dos */}
-        <div className="w-1/2 border p-4 rounded-md shadow-md">
+        <div className="w-1/2 border p-4 rounded-xl shadow-md">
           <ChatGpt 
             actions={actions} 
             news={news} 
@@ -40,13 +40,12 @@ function App() {
             balance={balance} 
           />
         </div>
-        <div className="w-1/2 border p-4 rounded-md shadow-md">
           <Actions chartData={actions} />
-        </div>
+        
       </div>
 
       {/* News */}
-      <div className="border p-4 rounded-md shadow-md">
+      <div className="border p-4 rounded-xl shadow-md">
         <News news={news} />
       </div>
     </div>

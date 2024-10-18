@@ -135,7 +135,7 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                 </TableBody>
                   <TableRow>
                     <TableCell className="pl-6 text-lg font-bold text-left">Total del Pasivo</TableCell>
-                    <TableCell className="text-right text-xs pr-6 text-lg font-bold">
+                    <TableCell className="text-right pr-6 text-lg font-bold">
                       ${balance.totalPasivo.toLocaleString("en-US")}
                     </TableCell>
                   </TableRow>
