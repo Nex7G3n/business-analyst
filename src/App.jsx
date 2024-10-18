@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import Balance_ratios from  './components/Balance_Ratios'
-import News from  './components/News'
-import { Search } from './components/Search'
-import { ChatGpt } from './components/ChatGpt'
+import Balance_ratios from  '@/components/Balance_Ratios'
+import News from  '@/components/News'
+import { Search } from '@/components/Search'
+import { ChatGpt } from '@/components/ChatGpt'
+import { Actions } from '@/components/Actions'
 
 function App() {
   const [symbol, setSymbol] = useState('');
@@ -15,11 +16,13 @@ function App() {
   return (
     <>
       <Search symbol={symbol} setSymbol={setSymbol} setBalance={setBalance} setRatios={setRatios} setNews={setNews} setActions={setActions}/>
+      <Actions chartData={actions} />
       <Balance_ratios balance={balance} ratios={ratios}/>
       <ChatGpt actions={actions} news={news} ratios={ratios} balance={balance} />
-      <News news={news}/>
+      <News news={news} />
     </>
   )
 }
 
 export default App
+
