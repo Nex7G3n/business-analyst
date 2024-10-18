@@ -12,21 +12,25 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
     const apikey_news = '75a1603eecb042598d28343256620698';
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        const inputSymbol = event.target[0].value;
-        setSymbol(inputSymbol);
-        const financialData = await getFinancialData(inputSymbol);
-        if (financialData) {
-          setBalance(financialData);
-          const calculatedRatios = calculateRatios(financialData);
-          setRatios(calculatedRatios);
-        } else {
-          setBalance(null);
-          setRatios(null);
-        }
-        await getArticles(inputSymbol);
-        await getActions(inputSymbol);
-    }
+      setNews(null);
+      setActions(null);
+
+      event.preventDefault();
+      const inputSymbol = event.target[0].value;
+      setSymbol(inputSymbol);
+      const financialData = await getFinancialData(inputSymbol);
+      if (financialData) {
+        setBalance(financialData);
+        const calculatedRatios = calculateRatios(financialData);
+        setRatios(calculatedRatios);
+      } else {
+        setBalance(null);
+        setRatios(null);
+      }
+      await getArticles(inputSymbol);
+      await getActions(inputSymbol);
+  }
+
 
 
 
@@ -122,7 +126,7 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
     const getArticles = async (symbol) => {
         axios.get(`https://newsapi.org/v2/everything?q=${symbol}&language=es&sortBy=publishedAt&apiKey=${apikey_news}`)
         .then(response => {
-            setNews(response.data.articles);
+            setNews(response.data.articles.slice(0, 20));
             console.log('Noticias:', response.data.articles);
         })
         .catch(error => {
@@ -172,7 +176,6 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
           setActions(null);
         } else {
           setActions(result);
-          console.log('Acciones:', result);
         }
       } catch (error) {
         console.error('Error al obtener los datos:', error);
