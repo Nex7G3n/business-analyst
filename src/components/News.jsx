@@ -26,21 +26,21 @@ function News({ news }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {!!news && currentItems.map((article, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-              <CardHeader>
+              <CardHeader >
                 <img
                   src={article.urlToImage}
                   alt={article.title}
                   className="w-full h-40 object-cover rounded-md"
                 />
-                <CardTitle className="mt-10">{article.title}</CardTitle>
-                <Badge variant="outline" className="mt-1">{article.source.name}</Badge>
+                <CardTitle >{article.title}</CardTitle>
+                <Badge variant="outline">{article.source.name}</Badge>
               </CardHeader>
               <CardFooter className="flex justify-between">
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline">Ver más</Button>
                   </DialogTrigger>
-                  <DialogContent>
+                  <DialogContent className="p-10">
                     <DialogHeader>
                       <DialogTitle>{article.title}</DialogTitle>
                     </DialogHeader>
