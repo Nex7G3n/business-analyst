@@ -1,21 +1,22 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-function FinancialPieChart({ totalActivo, totalPasivo, capitalPropio, beneficioNeto, activoCorriente, pasivoCorriente }) {
+function FinancialPieChart({ totalActivo, totalPasivo, capitalPropio, beneficioNeto, activoCorriente, pasivoCorriente, ventasTotales}) {
   const data = [
     { name: 'Activo Corriente', value: parseFloat(activoCorriente) || 0 },
     { name: 'Pasivo Corriente', value: parseFloat(pasivoCorriente) || 0 },
-    { name: 'Total Pasivo', value: parseFloat(totalPasivo) || 0 },
-    { name: 'Total Activo', value: parseFloat(totalActivo) || 0 },
+    { name: 'Pasivo no corriente', value: parseFloat(totalPasivo - pasivoCorriente) || 0 },
+    { name: 'Activo no corriente', value: parseFloat(totalActivo - activoCorriente) || 0 },
     { name: 'Beneficio Neto', value: parseFloat(beneficioNeto) || 0 },
     { name: 'Capital Propio', value: parseFloat(capitalPropio) || 0 },
+    { name: 'Ventas Totales', value: parseFloat(capitalPropio) || 0 }
   ];
 
   // Colores para cada segmento del gráfico de torta
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF6384', '#36A2EB'];
 
   return (
-    <div style={{ width: '100%', height: 400 }}>
+    <div style={{ width: '100%', height: 460}}>
       <ResponsiveContainer>
         <PieChart>
           <Pie

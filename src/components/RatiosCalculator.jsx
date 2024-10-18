@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -21,80 +20,136 @@ export function RatiosCalculator() {
     const [totalActivo, setTotalActivo] = useState('');
     const [beneficioNeto, setBeneficioNeto] = useState('');
     const [capitalPropio, setCapitalPropio] = useState('');
-    const [ratios, setRatios] = useState(null);
+    const [ventasTotales, setVentasTotales] = useState(''); // Para los nuevos ratios
+    const [ratios, setRatios] = useState(null); // Aquí es donde setRatios debe estar correctamente definido
+
+
     return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Calcula manualmente</Button>
+        <Button variant="outline">Calcular Ratios Financieros</Button>
       </DialogTrigger>
-      <DialogContent className="flex flex-row">
-        <div className="grid gap-4 py-4">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
-        <Input
+      <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]"> {/* Aumentamos la altura mínima */}
+        <div className="w-1/2">
+          <DialogHeader>
+            <DialogTitle>Calculadora de Ratios Financieros</DialogTitle>
+            <DialogDescription>
+              Introduce los valores necesarios para calcular los ratios financieros.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="grid gap-4 mt-4">
+            <div>
+              <label className="font-semibold">Activo Corriente</label>
+              <Input
+                id="activoCorriente"
                 type="number" 
-                placeholder="Activo Corriente" 
+                placeholder="0.0" 
                 value={activoCorriente} 
                 onChange={(e) => setActivoCorriente(e.target.value)} 
-            />
-            <Input 
+              />
+            </div>
+            <div>
+              <label className="font-semibold">Pasivo Corriente</label>
+              <Input 
+                id="pasivoCorriente"
                 type="number" 
-                placeholder="Pasivo Corriente" 
+                placeholder="0.0" 
                 value={pasivoCorriente} 
                 onChange={(e) => setPasivoCorriente(e.target.value)} 
-            />
-            <Input 
+              />
+            </div>
+            <div>
+              <label className="font-semibold">Total Pasivo</label>
+              <Input 
+                id="totalPasivo"
                 type="number" 
-                placeholder="Total Pasivo" 
+                placeholder="0.0" 
                 value={totalPasivo} 
                 onChange={(e) => setTotalPasivo(e.target.value)} 
-            />
-            <Input 
+              />
+            </div>
+            <div>
+              <label className="font-semibold">Total Activo</label>
+              <Input 
+                id="totalActivo"
                 type="number" 
-                placeholder="Total Activo" 
+                placeholder="0.0" 
                 value={totalActivo} 
                 onChange={(e) => setTotalActivo(e.target.value)} 
-            />
-            <Input 
+              />
+            </div>
+            <div>
+              <label className="font-semibold">Beneficio Neto</label>
+              <Input 
+                id="beneficioNeto"
                 type="number" 
-                placeholder="Beneficio Neto" 
+                placeholder="0.0" 
                 value={beneficioNeto} 
                 onChange={(e) => setBeneficioNeto(e.target.value)} 
-            />
-            <Input 
+              />
+            </div>
+            <div>
+              <label className="font-semibold">Capital Propio</label>
+              <Input 
+                id="capitalPropio"
                 type="number" 
-                placeholder="Capital Propio" 
+                placeholder="0.0" 
                 value={capitalPropio} 
                 onChange={(e) => setCapitalPropio(e.target.value)} 
-            />  
-        <DialogFooter>
-          <Button onClick={() => {
-            calculateRatios(activoCorriente, pasivoCorriente, totalPasivo, totalActivo, beneficioNeto, capitalPropio, setRatios)
-            console.log(ratios)
-          }} >Calcular Ratios</Button>
-        </DialogFooter>
+              />
+            </div>
+            <div>
+              <label className="font-semibold">Ventas totales</label>
+              <Input 
+                id="ventasTotales"
+                type="number" 
+                placeholder="0.0" 
+                value={ventasTotales} 
+                onChange={(e) => setVentasTotales(e.target.value)} 
+              />
+            </div>
+          </div>
+
+          <DialogFooter className="mt-7">
+            <Button className="w-full" onClick={() => {
+              calculateRatios(activoCorriente, pasivoCorriente, totalPasivo, totalActivo, beneficioNeto, capitalPropio, ventasTotales, setRatios)
+            }}>
+              Calcular
+            </Button>
+          </DialogFooter>
         </div>
-      {ratios && (
-                <div>
-                    <strong>Ratios calculados:</strong>
-                    <p>Ratio de Liquidez Corriente: {ratios.ratioLiquidez}</p>
-                    <p>Ratio de Endeudamiento: {ratios.ratioEndeudamiento}</p>
-                    <p>ROE (Rentabilidad sobre el Capital): {ratios.roe}</p>
-                    <p>ROA (Rentabilidad sobre el Activo): {ratios.roa}</p>
-                    <FinancialPieChart
-                      activoCorriente={activoCorriente}
-                      pasivoCorriente={pasivoCorriente}
-                      totalPasivo={totalPasivo}
-                      totalActivo={totalActivo}
-                      beneficioNeto={beneficioNeto}
-                      capitalPropio={capitalPropio}
-                    />
-                </div>
-            )}
+
+        <div className="w-1/2 flex flex-col justify-center items-center">
+          {ratios ? (
+            <div className="w-full h-full flex flex-col justify-center">
+              <strong>Ratios calculados:</strong>
+              <div className="mt-2 p-4 border rounded-lg shadow-sm bg-gray-50">
+                <p><strong>Ratio de Liquidez Corriente:</strong> {ratios.ratioLiquidez}</p>
+                <p><strong>Ratio de Endeudamiento:</strong> {ratios.ratioEndeudamiento}</p>
+                <p><strong>ROE (Rentabilidad sobre el Capital):</strong> {ratios.roe}</p>
+                <p><strong>ROA (Rentabilidad sobre el Activo):</strong> {ratios.roa}</p>
+                <p><strong>Rotación de Activos:</strong> {ratios.rotacionActivos}</p>
+                <p><strong>Margen de Beneficio Neto:</strong> {ratios.margenBeneficioNeto}</p>
+                <p><strong>Capital de Trabajo:</strong> {ratios.capitalTrabajo}</p>
+              </div>
+              <div className="w-full h-full">
+                <FinancialPieChart
+                  className="w-full h-full"
+                  activoCorriente={activoCorriente}
+                  pasivoCorriente={pasivoCorriente}
+                  totalPasivo={totalPasivo}
+                  totalActivo={totalActivo}
+                  beneficioNeto={beneficioNeto}
+                  capitalPropio={capitalPropio}
+                  ventasTotales={ventasTotales}
+                />
+              </div>
+            </div>
+          ) : (
+            <p>Por favor, introduce los valores necesarios.</p>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   )
