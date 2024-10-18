@@ -11,6 +11,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { Actions } from "./Actions";
 
 export const ChatGpt = ({ ratios, balance, news, actions }) => {
     const [interpretation, setInterpretation] = useState(null);
