@@ -9,9 +9,11 @@ function App() {
   const [balance, setBalance] = useState(null);
   const [ratios, setRatios] = useState(null);
   const [news, setNews] = useState(null);
+  const [actions, setActions] = useState(null);
+
   return (
     <>
-      <Search symbol={symbol} setSymbol={setSymbol} setBalance={setBalance} setRatios={setRatios} setNews={setNews}/>
+      <Search symbol={symbol} setSymbol={setSymbol} setBalance={setBalance} setRatios={setRatios} setNews={setNews} setActions={setActions}/>
       <Balance_ratios balance={balance} ratios={ratios}/>
       <News news={news}/>
     </>

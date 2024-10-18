@@ -7,7 +7,7 @@ import { earningsResponse } from '@/data/earningsResponse'
 import { overviewResponse } from '@/data/overviewResponse'
 
 
-export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews }) => {
+export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setActions }) => {
     const apiKey = '  ';
     const apikey_news = '75a1603eecb042598d28343256620698';
 
@@ -25,6 +25,7 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews }) =>
           setRatios(null);
         }
         await getArticles(inputSymbol);
+        await getActions(inputSymbol);
     }
 
 
@@ -127,6 +128,55 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews }) =>
         .catch(error => {
             console.error('Error al hacer la solicitud de noticias:', error);
         });
+    }
+
+    function predictFuture(data) {
+      if (!data || !data['Time Series (Daily)']) {
+        return 'Datos insuficientes para hacer una predicción';
+      }
+  
+      const timeSeries = data['Time Series (Daily)'];
+      const closingPrices = Object.keys(timeSeries).map(date => parseFloat(timeSeries[date]['4. close']));
+  
+      if (closingPrices.length < 2) {
+        return 'No hay suficientes datos históricos para hacer una predicción';
+      }
+  
+      let risingCount = 0;
+      let fallingCount = 0;
+  
+      for (let i = 0; i < closingPrices.length - 1; i++) {
+        if (closingPrices[i] > closingPrices[i + 1]) {
+          risingCount++;
+        } else {
+          fallingCount++;
+        }
+      }
+  
+      if (risingCount > fallingCount) {
+        return 'Subirá';
+      } else {
+        return 'Bajará';
+      }
+    }
+  
+    async function getActions(symbol) {
+      console.log('Símbolo:', symbol);
+      const apiKey_actions = 'DSRMZ2S6ADA4FD9B';
+
+      try {
+        const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey_actions}`);
+        const result = await response.json();
+  
+        if (result['Error Message']) {
+          setActions(null);
+        } else {
+          setActions(result);
+          console.log('Acciones:', result);
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
     }
 
     return (
