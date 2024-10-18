@@ -13,6 +13,7 @@ function App() {
     <>
       <Search symbol={symbol} setSymbol={setSymbol} setBalance={setBalance} setRatios={setRatios} setNews={setNews}/>
       <Balance_ratios balance={balance} ratios={ratios}/>
+      <News news={news}/>
     </>
   )
 }
