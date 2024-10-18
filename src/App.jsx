@@ -6,6 +6,7 @@ import RatiosFinancieros from '@/components/Ratios'
 import { Search } from '@/components/Search';
 import { ChatGpt } from '@/components/ChatGpt';
 import { Actions } from '@/components/Actions';
+import { RatiosCalculator } from '@/components/RatiosCalculator'
 
 function App() {
   const [symbol, setSymbol] = useState('');
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="p-6 space-y-10"> {/* Espaciado vertical entre secciones */}
-
+      <RatiosCalculator />
       <Search 
         symbol={symbol} 
         setSymbol={setSymbol} 
@@ -26,7 +27,7 @@ function App() {
         setActions={setActions} 
       />
 
-      
+
       <div className="flex space-x-6">
         <RatiosFinancieros ratios={ratios}/>
         <Actions chartData={actions} />
