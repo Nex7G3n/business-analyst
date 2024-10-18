@@ -206,12 +206,12 @@ const BalanceFinanciero = ({ balance, ratios }) => {
       )}
 
       {ratios && (
-        <Card>
+        <Card className="w-1/2">
           <Table>
           <TableHeader className="bg-gray-200">
             <TableRow>
               <TableCell className="w-[200px] font-bold">RATIO</TableCell>
-              <TableHead className="text-right">Valor</TableHead>
+              <TableCell className="text-right font-bold">VALOR</TableCell>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -221,15 +221,15 @@ const BalanceFinanciero = ({ balance, ratios }) => {
               <TableCell className="text-right">{ratios.per}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium text-left">Precio sobre Ventas (PV)</TableCell>
+              <TableCell className="font-medium text-left pl-8">Precio sobre Ventas (PV)</TableCell>
               <TableCell className="text-right">{ratios.pv}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium text-left">Precio sobre Valor Contable (Price to Book)</TableCell>
+              <TableCell className="font-medium text-left pl-8">Precio sobre Valor Contable (Price to Book)</TableCell>
               <TableCell className="text-right">{ratios.pb}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium text-left">ROE</TableCell>
+              <TableCell className="font-medium text-left pl-8">ROE</TableCell>
               <TableCell className="text-right">{ratios.roe}</TableCell>
             </TableRow>
           </TableBody>
