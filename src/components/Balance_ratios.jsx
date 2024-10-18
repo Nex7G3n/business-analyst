@@ -8,238 +8,224 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
+import { Card } from "@/components/ui/card"; // Asegúrate de tener este componente
 import React from 'react';
 
 const BalanceFinanciero = ({ balance, ratios }) => {
   return (
-    <div className="space-y-6 grid justify-center my-10">
+    <div className="space-y-6 my-16">
       {balance && (
         <>
-          <Table className="w-[1100px]">
-            <TableCaption>Balance Financiero</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[300px] text-lg">Item</TableHead>
-                <TableHead className="text-right text-lg">Valor (USD)</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {/* ACTIVO */}
-              <TableRow>
-                <TableCell className="font-bold text-left bg-gray-100" colSpan={2}>
-                  ACTIVO
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">Disponible</TableCell>
-                <TableCell className="text-right">
-                  ${balance.disponible.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">
-                  Bancos y Otras Empresas del Sistema FII
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.bancosFII.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">Otras Disponibilidades</TableCell>
-                <TableCell className="text-right">
-                  ${balance.otrasDisponibilidades.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 font-medium text-left">
-                  Cartera de Créditos
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.carteraCreditos.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-16 text-left">Créditos Vigentes</TableCell>
-                <TableCell className="text-right">
-                  ${balance.creditosVigentes.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-16 text-left">
-                  Créditos en Cobranza Judicial
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.creditosCobranza.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-16 text-left">
-                  Provisiones para Créditos
-                </TableCell>
-                <TableCell className="text-right">
-                  (${balance.provisionesCreditos.toLocaleString("en-US")})
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-16 text-left">
-                  Inmuebles, Mobiliario y Equipo
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.inmueblesEquipos.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 font-bold text-left">
-                  Total Activo
-                </TableCell>
-                <TableCell className="text-right font-bold">
-                  ${balance.totalActivo.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
+          <div className="grid grid-cols-3 gap-4"> {/* Añadido para organizar en columnas */}
+            {/* Sección ACTIVO */}
+            <Card>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-bold rounded-t-md bg-gray-200 text-center" colSpan={2}>
+                      ACTIVO
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className=" text-left pl-6">Disponible</TableCell>
+                    <TableCell className="text-right text-xs pr-6">
+                      ${balance.disponible.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="text-left w-[185px] pl-6">Bancos y Otras Empresas del Sistema FII</TableCell>
+                    <TableCell className="text-right text-xs pr-5">
+                      ${balance.bancosFII.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="text-left pl-6">Otras Disponibilidades</TableCell>
+                    <TableCell className="text-right text-xs pr-5">
+                      ${balance.otrasDisponibilidades.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium text-left pl-6">Cartera de Créditos</TableCell>
+                    <TableCell className="text-right text-xs pr-5">
+                      ${balance.carteraCreditos.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-10 text-left">Créditos Vigentes</TableCell>
+                    <TableCell className="text-right text-xs pr-5">
+                      ${balance.creditosVigentes.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-10 text-left">Créditos en Cobranza Judicial</TableCell>
+                    <TableCell className="text-right text-xs pr-5">
+                      ${balance.creditosCobranza.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-10 text-left">Provisiones para Créditos</TableCell>
+                    <TableCell className="text-right text-xs pr-5">
+                      (${balance.provisionesCreditos.toLocaleString("en-US")})
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-10 text-left">Inmuebles, Mobiliario y Equipo</TableCell>
+                    <TableCell className="text-right text-xs pr-5">
+                      ${balance.inmueblesEquipos.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-lg font-bold text-left">Total Activo</TableCell>
+                    <TableCell className="text-right font-bold pr-5 text-lg">
+                      ${balance.totalActivo.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Card>
 
-              {/* PASIVO */}
-              <TableRow>
-                <TableCell className="font-bold text-left bg-gray-100" colSpan={2}>
-                  PASIVO
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">
-                  Obligaciones con los Asociados
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.obligacionesAsociados.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">
-                  Obligaciones por Cuentas de Ahorro
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.obligacionesAhorro.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">
-                  Obligaciones por Cuenta a Plazo
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.obligacionesPlazo.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">Gastos por Pagar</TableCell>
-                <TableCell className="text-right">
-                  ${balance.gastosPorPagar.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">Cuentas por Pagar</TableCell>
-                <TableCell className="text-right">
-                  ${balance.cuentasPorPagar.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">
-                  Provisiones Asociativas
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.provisionesAsociativas.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 font-bold text-left">
-                  Total del Pasivo
-                </TableCell>
-                <TableCell className="text-right font-bold">
-                  ${balance.totalPasivo.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
+            {/* Sección PASIVO */}
+            <Card>
+              <Table >
+                
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-bold text-center rounded-t-md bg-gray-200" colSpan={2}>
+                      PASIVO
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left w-[170px]">Obligaciones con los Asociados</TableCell>
+                    <TableCell className="text-right text-xs pr-6">
+                      ${balance.obligacionesAsociados.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Obligaciones por Cuentas de Ahorro</TableCell>
+                    <TableCell className="text-right text-xs pr-6">
+                      ${balance.obligacionesAhorro.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Obligaciones por Cuenta a Plazo</TableCell>
+                    <TableCell className="text-right text-xs pr-6">
+                      ${balance.obligacionesPlazo.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Gastos por Pagar</TableCell>
+                    <TableCell className="text-right text-xs pr-6">
+                      ${balance.gastosPorPagar.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Cuentas por Pagar</TableCell>
+                    <TableCell className="text-right text-xs pr-6">
+                      ${balance.cuentasPorPagar.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Provisiones Asociativas</TableCell>
+                    <TableCell className="text-right text-xs pr-6">
+                      ${balance.provisionesAsociativas.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-lg font-bold text-left">Total del Pasivo</TableCell>
+                    <TableCell className="text-right text-xs pr-6 text-lg font-bold">
+                      ${balance.totalPasivo.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Card>
 
-              {/* PATRIMONIO */}
-              <TableRow>
-                <TableCell className="font-bold text-left bg-gray-100" colSpan={2}>
-                  PATRIMONIO
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">Capital Social</TableCell>
-                <TableCell className="text-right">
-                  ${balance.capitalSocial.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">Reservas</TableCell>
-                <TableCell className="text-right">
-                  ${balance.reservas.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">
-                  Resultados Acumulados
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.resultadosAcumulados.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 text-left">
-                  Resultado Neto del Ejercicio
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.resultadoEjercicio.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="pl-8 font-bold text-left">
-                  Total del Patrimonio
-                </TableCell>
-                <TableCell className="text-right font-bold">
-                  ${balance.totalPatrimonio.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
+            {/* Sección PATRIMONIO */}
+            <Card>
+              <Table>
+                
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-bold text-center rounded-t-md bg-gray-200" colSpan={2}>
+                      PATRIMONIO
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left w-[180px]">Capital Social</TableCell>
+                    <TableCell className="text-right pr-6 text-xs">
+                      ${balance.capitalSocial.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Reservas</TableCell>
+                    <TableCell className="text-right pr-6 text-xs">
+                      ${balance.reservas.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Resultados Acumulados</TableCell>
+                    <TableCell className="text-right pr-6 text-xs">
+                      ${balance.resultadosAcumulados.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-left">Resultado Neto del Ejercicio</TableCell>
+                    <TableCell className="text-right pr-6 text-xs">
+                      ${balance.resultadoEjercicio.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 font-bold text-left text-lg">Total del Patrimonio</TableCell>
+                    <TableCell className="text-right pr-6 text-lg font-bold">
+                      ${balance.totalPatrimonio.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Card>
+          </div>
 
-              {/* TOTAL PASIVO Y PATRIMONIO */}
-              <TableRow>
-                <TableCell className="pl-8 font-bold text-left">
-                  Total del Pasivo y Patrimonio
-                </TableCell>
-                <TableCell className="text-right">
-                  ${balance.totalPasivoPatrimonio.toLocaleString("en-US")}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          {/* TOTAL PASIVO Y PATRIMONIO */}
+          <Card>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="pl-8 text-lg font-bold text-left">
+                    Total del Pasivo y Patrimonio
+                  </TableCell>
+                  <TableCell className="text-right">
+                    ${balance.totalPasivoPatrimonio.toLocaleString("en-US")}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Card>
 
           <Separator />
         </>
       )}
 
       {ratios && (
-        <Table>
-          <TableCaption>Ratios Financieros</TableCaption>
-          <TableHeader>
+        <Card>
+          <Table>
+          <TableHeader className="bg-gray-200">
             <TableRow>
-              <TableHead className="w-[200px] text-lg">Ratio</TableHead>
-              <TableHead className="text-right text-lg">Valor</TableHead>
+              <TableCell className="w-[200px] font-bold">RATIO</TableCell>
+              <TableHead className="text-right">Valor</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {/* Ratios */}
             <TableRow>
-              <TableCell className="font-medium text-left">PER</TableCell>
+              <TableCell className="font-medium text-left pl-8">PER</TableCell>
               <TableCell className="text-right">{ratios.per}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium text-left">
-                Precio sobre Ventas (PV)
-              </TableCell>
+              <TableCell className="font-medium text-left">Precio sobre Ventas (PV)</TableCell>
               <TableCell className="text-right">{ratios.pv}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium text-left">
-                Precio sobre Valor Contable (Price to Book)
-              </TableCell>
+              <TableCell className="font-medium text-left">Precio sobre Valor Contable (Price to Book)</TableCell>
               <TableCell className="text-right">{ratios.pb}</TableCell>
             </TableRow>
             <TableRow>
@@ -248,6 +234,8 @@ const BalanceFinanciero = ({ balance, ratios }) => {
             </TableRow>
           </TableBody>
         </Table>
+        </Card>
+        
       )}
     </div>
   );
