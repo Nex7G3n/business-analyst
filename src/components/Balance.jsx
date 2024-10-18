@@ -11,15 +11,17 @@ import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card"; // Asegúrate de tener este componente
 import React from 'react';
 
-const BalanceFinanciero = ({ balance, ratios }) => {
+const BalanceFinanciero = ({ balance }) => {
   return (
     <div className="space-y-6 my-8">
       {balance && (
         <>
+          <h1>Balance General</h1>
+          <Separator />
           <div className="grid grid-cols-3 gap-4"> {/* Añadido para organizar en columnas */}
             {/* Sección ACTIVO */}
             <Card>
-              <Table>
+              <Table >
                 <TableBody>
                   <TableRow>
                     <TableCell className="font-bold rounded-t-md bg-gray-200 text-center" colSpan={2}>
@@ -75,12 +77,12 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                     </TableCell>
                   </TableRow>
 
-                <TableRow>
-                  <TableCell className="pl-6 text-lg font-bold text-left">Total Activo</TableCell>
-                  <TableCell className="text-right font-bold pr-5 ">
-                    ${balance.totalActivo.toLocaleString("en-US")}
-                  </TableCell>
-                </TableRow>
+                  <TableRow>
+                    <TableCell className="pl-6 text-lg font-bold text-left">Total Activo</TableCell>
+                    <TableCell className="text-right font-bold pr-5 ">
+                      ${balance.totalActivo.toLocaleString("en-US")}
+                    </TableCell>
+                  </TableRow>
                   
                 </TableBody>
               </Table>
@@ -202,42 +204,7 @@ const BalanceFinanciero = ({ balance, ratios }) => {
               </TableBody>
             </Table>
           </Card>
-
-          <Separator />
         </>
-      )}
-
-      {ratios && (
-        <Card className="w-1/2">
-          <Table>
-          <TableHeader className="bg-gray-200">
-            <TableRow>
-              <TableCell className="w-[200px] font-bold">RATIO</TableCell>
-              <TableCell className="text-right font-bold">VALOR</TableCell>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {/* Ratios */}
-            <TableRow>
-              <TableCell className="font-medium text-left pl-8">PER</TableCell>
-              <TableCell className="text-right">{ratios.per}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium text-left pl-8">Precio sobre Ventas (PV)</TableCell>
-              <TableCell className="text-right">{ratios.pv}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium text-left pl-8">Precio sobre Valor Contable (Price to Book)</TableCell>
-              <TableCell className="text-right">{ratios.pb}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium text-left pl-8">ROE</TableCell>
-              <TableCell className="text-right">{ratios.roe}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-        </Card>
-        
       )}
     </div>
   );

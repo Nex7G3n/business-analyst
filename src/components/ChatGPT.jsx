@@ -12,6 +12,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Actions } from "./Actions";
+import { Separator } from "@radix-ui/react-separator";
 
 export const ChatGpt = ({ ratios, balance, news, actions }) => {
     const [interpretation, setInterpretation] = useState(null);
@@ -111,11 +112,11 @@ export const ChatGpt = ({ ratios, balance, news, actions }) => {
     return (
         <div>
             <h1>Interpretación</h1>
+            <Separator />
             {error ? (
                 <p>{error}</p>
             ) : interpretation ? (
-                <Table className="w-[700px]">
-                <TableCaption>Análisis de Decisiones</TableCaption>
+                <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead className="text-lg">Categoría</TableHead>

@@ -194,8 +194,8 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
     }
 
     return (
-        <form className="flex w-full max-w-sm items-center space-x-2" onSubmit={handleSubmit}>
-            <Input type="text" placeholder="Busqueda"/>
+        <form className="flex w-full items-center space-x-2 justify-center" onSubmit={handleSubmit}>
+            <Input type="text" placeholder="Busqueda" className="max-w-sm"/>
             <Button type="submit">Buscar</Button>
         </form>
     )
