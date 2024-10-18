@@ -78,7 +78,7 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                 </TableBody>
                 <TableFooter>
                   <TableCell className="pl-6 text-lg font-bold text-left">Total Activo</TableCell>
-                  <TableCell className="text-right font-bold pr-5 text-lg">
+                  <TableCell className="text-right font-bold pr-5 ">
                     ${balance.totalActivo.toLocaleString("en-US")}
                   </TableCell>
                 </TableFooter>
@@ -133,7 +133,7 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                 </TableBody>
                 <TableFooter>
                   <TableCell className="pl-6 text-lg font-bold text-left">Total del Pasivo</TableCell>
-                  <TableCell className="text-right text-xs pr-6 text-lg font-bold">
+                  <TableCell className="text-right pr-6 font-bold">
                     ${balance.totalPasivo.toLocaleString("en-US")}
                   </TableCell>
                 </TableFooter>
@@ -177,7 +177,7 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                 </TableBody>
                 <TableFooter>
                   <TableCell className="pl-6 font-bold text-left text-lg">Total del Patrimonio</TableCell>
-                  <TableCell className="text-right pr-6 text-lg font-bold">
+                  <TableCell className="text-right pr-6 font-bold">
                     ${balance.totalPatrimonio.toLocaleString("en-US")}
                   </TableCell>
                 </TableFooter>
