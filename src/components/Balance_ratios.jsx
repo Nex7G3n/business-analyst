@@ -6,6 +6,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableFooter,
 } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card"; // Asegúrate de tener este componente
@@ -74,20 +75,19 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                       ${balance.inmueblesEquipos.toLocaleString("en-US")}
                     </TableCell>
                   </TableRow>
-                  <TableRow>
-                    <TableCell className="pl-6 text-lg font-bold text-left">Total Activo</TableCell>
-                    <TableCell className="text-right font-bold pr-5 text-lg">
-                      ${balance.totalActivo.toLocaleString("en-US")}
-                    </TableCell>
-                  </TableRow>
                 </TableBody>
+                <TableFooter>
+                  <TableCell className="pl-6 text-lg font-bold text-left">Total Activo</TableCell>
+                  <TableCell className="text-right font-bold pr-5 text-lg">
+                    ${balance.totalActivo.toLocaleString("en-US")}
+                  </TableCell>
+                </TableFooter>
               </Table>
             </Card>
 
             {/* Sección PASIVO */}
             <Card>
-              <Table >
-                
+              <Table>
                 <TableBody>
                   <TableRow>
                     <TableCell className="font-bold text-center rounded-t-md bg-gray-200" colSpan={2}>
@@ -130,13 +130,13 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                       ${balance.provisionesAsociativas.toLocaleString("en-US")}
                     </TableCell>
                   </TableRow>
-                  <TableRow>
-                    <TableCell className="pl-6 text-lg font-bold text-left">Total del Pasivo</TableCell>
-                    <TableCell className="text-right text-xs pr-6 text-lg font-bold">
-                      ${balance.totalPasivo.toLocaleString("en-US")}
-                    </TableCell>
-                  </TableRow>
                 </TableBody>
+                <TableFooter>
+                  <TableCell className="pl-6 text-lg font-bold text-left">Total del Pasivo</TableCell>
+                  <TableCell className="text-right text-xs pr-6 text-lg font-bold">
+                    ${balance.totalPasivo.toLocaleString("en-US")}
+                  </TableCell>
+                </TableFooter>
               </Table>
             </Card>
 
@@ -174,13 +174,13 @@ const BalanceFinanciero = ({ balance, ratios }) => {
                       ${balance.resultadoEjercicio.toLocaleString("en-US")}
                     </TableCell>
                   </TableRow>
-                  <TableRow>
-                    <TableCell className="pl-6 font-bold text-left text-lg">Total del Patrimonio</TableCell>
-                    <TableCell className="text-right pr-6 text-lg font-bold">
-                      ${balance.totalPatrimonio.toLocaleString("en-US")}
-                    </TableCell>
-                  </TableRow>
                 </TableBody>
+                <TableFooter>
+                  <TableCell className="pl-6 font-bold text-left text-lg">Total del Patrimonio</TableCell>
+                  <TableCell className="text-right pr-6 text-lg font-bold">
+                    ${balance.totalPatrimonio.toLocaleString("en-US")}
+                  </TableCell>
+                </TableFooter>
               </Table>
             </Card>
           </div>

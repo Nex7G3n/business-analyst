@@ -175,7 +175,18 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
         if (result['Error Message']) {
           setActions(null);
         } else {
-          setActions(result);
+          const actions = Object.entries(result["Time Series (Daily)"]).map(([date, values]) => ({
+            date: date,
+            desktop: parseFloat(values["1. open"]), // open
+            mobile: parseFloat(values["4. close"]) ,  // close
+            open: parseFloat(values["1. open"]),
+            high: parseFloat(values["2. high"]),
+            low: parseFloat(values["3. low"]),
+            close: parseFloat(values["4. close"]),
+            volume: parseInt(values["5. volume"]),
+          }));  
+
+          setActions(actions);
         }
       } catch (error) {
         console.error('Error al obtener los datos:', error);
