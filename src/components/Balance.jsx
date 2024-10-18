@@ -16,7 +16,9 @@ const BalanceFinanciero = ({ balance }) => {
     <div className="space-y-6 my-8">
       {balance && (
         <>
-          <h1>Balance General</h1>
+          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gray-900 drop-shadow-lg">
+            Balance General
+          </h1>
           <Separator />
           <div className="grid grid-cols-3 gap-4"> {/* Añadido para organizar en columnas */}
             {/* Sección ACTIVO */}

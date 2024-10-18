@@ -19,8 +19,10 @@ function News({ news }) {
   const totalPages = news ? Math.ceil(news.length / itemsPerPage) : 0;
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">Últimas Noticias</h1>
+    <div className="p-6 grid gap-6">
+      <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gray-900 drop-shadow-lg">
+            Últimas noticias
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {!!news && currentItems.map((article, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow duration-300">

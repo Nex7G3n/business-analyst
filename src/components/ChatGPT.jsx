@@ -111,7 +111,9 @@ export const ChatGpt = ({ ratios, balance, news, actions }) => {
 
     return (
         <div>
-            <h1>Interpretación</h1>
+            <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gray-900 drop-shadow-lg">
+              Interpretación
+            </h1>
             <Separator />
             {error ? (
                 <p>{error}</p>
