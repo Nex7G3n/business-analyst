@@ -8,8 +8,8 @@ import { overviewResponse } from '@/data/overviewResponse'
 import { actionsResponse }  from '@/data/actionsResponse'
 
 export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setActions }) => {
-    const apiKey = '  ';
-    const apikey_news = '75a1603eecb042598d28343256620698';
+    const apiKey = 'QA2PPVULFLD4FCBN';
+    const apikey_news = 'b5a3aca5a3e843cebc952c471d7cd32d';
 
     const handleSubmit = async (event) => {
       setNews(null);
@@ -35,33 +35,33 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
 
 
     const getFinancialData = async (symbol) => {
-      // const balanceEndpoint = `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${symbol}&apikey=${apiKey}`;
-      // const earningsEndpoint = `https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${symbol}&apikey=${apiKey}`;
-      // const overviewEndpoint = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`;
+      const balanceEndpoint = `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${symbol}&apikey=${apiKey}`;
+      const earningsEndpoint = `https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${symbol}&apikey=${apiKey}`;
+      const overviewEndpoint = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`;
 
       try {
-        // const balanceResponse = await axios.get(balanceEndpoint);
-        // const earningsResponse = await axios.get(earningsEndpoint);
-        // const overviewResponse = await axios.get(overviewEndpoint);
+        const balanceResponse = await axios.get(balanceEndpoint);
+        const earningsResponse = await axios.get(earningsEndpoint);
+        const overviewResponse = await axios.get(overviewEndpoint);
 
-        // console.log('Respuesta del balance:', balanceResponse.data);
-        // console.log('Respuesta de ingresos:', earningsResponse.data);
-        // console.log('Respuesta de overview:', overviewResponse.data);
+        console.log('Respuesta del balance:', balanceResponse.data);
+        console.log('Respuesta de ingresos:', earningsResponse.data);
+        console.log('Respuesta de overview:', overviewResponse.data);
 
-        // if (!balanceResponse.data.annualReports || balanceResponse.data.annualReports.length === 0) {
-        //   console.error('No se encontraron datos de balance para esta empresa');
-        //   return null;
-        // }
+        if (!balanceResponse.data.annualReports || balanceResponse.data.annualReports.length === 0) {
+          console.error('No se encontraron datos de balance para esta empresa');
+          return null;
+        }
 
-        // if (!earningsResponse.data.annualReports || earningsResponse.data.annualReports.length === 0) {
-        //   console.error('No se encontraron datos de ingresos para esta empresa');
-        //   return null;
-        // }
+        if (!earningsResponse.data.annualReports || earningsResponse.data.annualReports.length === 0) {
+          console.error('No se encontraron datos de ingresos para esta empresa');
+          return null;
+        }
 
         const balance = balanceResponse.data.annualReports[0];
         const earnings = earningsResponse.data.annualReports[0];
         const overview = overviewResponse.data;
-        console.log(overview)
+        // console.log(overview)
 
 
         if (!balance || !earnings) {
@@ -165,12 +165,10 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
     }
   
     async function getActions(symbol) {
-      const apiKey_actions = 'DSRMZ2S6ADA4FD9B';
-
       try {
-        // const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey_actions}`);
-        // const result = await response.json();
-        const result = actionsResponse;
+        const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey}`);
+        const result = await response.json();
+        // const result = actionsResponse;
         if (result['Error Message']) {
           setActions(null);
         } else {
@@ -184,7 +182,7 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
             low: parseFloat(values["3. low"]),
             close: parseFloat(values["4. close"]),
             volume: parseInt(values["5. volume"]),
-          }));
+          })).reverse();
 
           setActions(actions);
         }
