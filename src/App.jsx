@@ -8,6 +8,7 @@ import { ChatGpt } from '@/components/ChatGpt';
 import { Actions } from '@/components/Actions';
 import { RatiosCalculator } from '@/components/RatiosCalculator'
 import FinancialPieChart from './components/Torta';
+import { EVACalculator } from './components/EvaCalculator';
 
 function App() {
   const [symbol, setSymbol] = useState('');
@@ -19,6 +20,9 @@ function App() {
   return (
     <div className="p-6 space-y-10"> {/* Espaciado vertical entre secciones */}
       <RatiosCalculator />
+
+      <EVACalculator />
+
       <Search 
         symbol={symbol} 
         setSymbol={setSymbol} 
@@ -27,7 +31,6 @@ function App() {
         setNews={setNews} 
         setActions={setActions} 
       />
-
 
       <div className="flex space-x-6">
         <RatiosFinancieros ratios={ratios}/>
