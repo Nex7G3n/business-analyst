@@ -10,6 +10,7 @@ import { RatiosCalculator } from '@/components/RatiosCalculator';
 import { WaccCalculator } from './components/WaccCalculator';
 import { EVACalculator } from './components/EvaCalculator';
 import { ApalancamientoCalculator } from './components/ApalancamientoCalculator';
+import EbitdaCalculator from './components/Ebitda';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -56,7 +57,7 @@ function App() {
         <div className="border p-4 rounded-xl shadow-sm">
           <BalanceFinanciero balance={balance} loading={loading} error={error} />
         </div>
-      )}
+      )}  
 
       {(loading || actions || news || ratios || balance) && (
         <div className="border p-4 rounded-xl shadow-md">
@@ -76,11 +77,12 @@ function App() {
       )}
 
       {(!loading || !actions || !news || !ratios || !balance) && (
-        <div className="grid gap-4 grid-cols-2">
+        <div className="grid gap-4 grid-cols-1 w-3/5 mx-auto">
           <RatiosCalculator />
           <ApalancamientoCalculator />
           <EVACalculator />
           <WaccCalculator />
+          <EbitdaCalculator />
         </div>
       )}
     </div>
