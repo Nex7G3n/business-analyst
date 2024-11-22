@@ -1,28 +1,52 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
+  TableRow,
 } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card"; // Asegúrate de tener este componente
-import React from 'react';
+import { Skeleton } from "@/components/ui/skeleton"; // Importa el componente Skeleton
 
-const BalanceFinanciero = ({ balance }) => {
+const BalanceFinanciero = ({ balance, loading }) => {
+  if (loading) {
+    // Mostrar Skeleton mientras los datos están cargando
+    return (
+      <div className="space-y-6 my-8">
+        <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gray-900 drop-shadow-lg">
+          Balance General
+        </h1>
+        <Separator />
+        <div className="grid grid-cols-3 gap-4">
+          {[...Array(3)].map((_, idx) => (
+            <Card key={idx}>
+              <div className="p-4 space-y-4">
+                <Skeleton className="h-6 w-1/2" />
+                <Skeleton className="h-4 w-3/4" />
+                <Skeleton className="h-4 w-2/3" />
+                <Skeleton className="h-4 w-1/2" />
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!balance) {
+    // Si no hay datos, no mostrar nada
+    return null;
+  }
+
   return (
     <div className="space-y-6 my-8">
-      {balance && (
-        <>
-          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gray-900 drop-shadow-lg">
-            Balance General
-          </h1>
-          <Separator />
-          <div className="grid grid-cols-3 gap-4"> {/* Añadido para organizar en columnas */}
-            {/* Sección ACTIVO */}
-            <Card>
+      <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gray-900 drop-shadow-lg">
+        Balance General
+      </h1>
+      <Separator />
+      <div className="grid grid-cols-3 gap-4">
+        {/* Sección ACTIVO */}
+        <Card>
               <Table >
                 <TableBody>
                   <TableRow>
@@ -206,8 +230,6 @@ const BalanceFinanciero = ({ balance }) => {
               </TableBody>
             </Table>
           </Card>
-        </>
-      )}
     </div>
   );
 };

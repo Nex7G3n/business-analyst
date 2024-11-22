@@ -20,8 +20,8 @@ export function RatiosCalculator() {
     const [totalActivo, setTotalActivo] = useState('');
     const [beneficioNeto, setBeneficioNeto] = useState('');
     const [capitalPropio, setCapitalPropio] = useState('');
-    const [ventasTotales, setVentasTotales] = useState(''); // Para los nuevos ratios
-    const [ratios, setRatios] = useState(null); // Aquí es donde setRatios debe estar correctamente definido
+    const [ventasTotales, setVentasTotales] = useState(''); 
+    const [ratios, setRatios] = useState(null);
 
     return (
     <Dialog>

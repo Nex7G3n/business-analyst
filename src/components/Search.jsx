@@ -1,38 +1,42 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { data } from "autoprefixer";
 import axios from 'axios';
-import { balanceResponse } from '@/data/balanceResponse'
-import { earningsResponse } from '@/data/earningsResponse'
-import { overviewResponse } from '@/data/overviewResponse'
-import { actionsResponse }  from '@/data/actionsResponse'
 
-export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setActions }) => {
+export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setActions, setLoading, setError }) => {
+
     const apiKey = 'QA2PPVULFLD4FCBN';
     const apikey_news = 'b5a3aca5a3e843cebc952c471d7cd32d';
 
     const handleSubmit = async (event) => {
-      setNews(null);
-      setActions(null);
+        event.preventDefault();
+        setLoading(true);
+        setError(null);
+        setNews(null);
+        setActions(null);
 
-      event.preventDefault();
-      const inputSymbol = event.target[0].value;
-      setSymbol(inputSymbol);
-      const financialData = await getFinancialData(inputSymbol);
-      if (financialData) {
-        setBalance(financialData);
-        const calculatedRatios = calculateRatios(financialData);
-        setRatios(calculatedRatios);
-      } else {
-        setBalance(null);
-        setRatios(null);
-      }
-      await getArticles(inputSymbol);
-      await getActions(inputSymbol);
-  }
+        const inputSymbol = event.target[0].value;
+        setSymbol(inputSymbol);
 
+        try {
+            const financialData = await getFinancialData(inputSymbol);
+            if (financialData) {
+                setBalance(financialData);
+                const calculatedRatios = calculateRatios(financialData);
+                setRatios(calculatedRatios);
+            } else {
+                setBalance(null);
+                setRatios(null);
+                throw new Error('No se encontraron datos financieros para este símbolo.');
+            }
 
-
+            await getArticles(inputSymbol);
+            await getActions(inputSymbol);
+        } catch (err) {
+            setError(err.message || 'Error desconocido al obtener los datos.');
+        } finally {
+            setLoading(false);
+        }
+    }
 
     const getFinancialData = async (symbol) => {
       const balanceEndpoint = `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${symbol}&apikey=${apiKey}`;

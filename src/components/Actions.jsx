@@ -1,4 +1,4 @@
- import * as React from "react";
+import * as React from "react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import {
@@ -14,6 +14,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+
+import { Skeleton } from "@/components/ui/skeleton"; // Importa el componente Skeleton
 
 export const description = "An interactive bar chart";
 
@@ -31,28 +33,43 @@ const chartConfig = {
   },
 };
 
-export function Actions({ chartData }) {
-    console.log("chartData", chartData);
-    if (!chartData) {
-        return (
-            <div>Hola mundo</div>
-        );
-    }
+export function Actions({ chartData, loading }) {
+  if (loading) {
+    // Mostrar Skeleton mientras carga
+    return (
+      <Card className="w-full">
+        <CardHeader>
+          <Skeleton className="h-6 w-1/3 mb-2" />
+          <Skeleton className="h-4 w-1/2" />
+        </CardHeader>
+        <CardContent>
+          <Skeleton className="h-48 w-full" />
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (!chartData) {
+    // Si no hay datos, no mostrar nada
+    return null;
+  }
+
   const [activeChart, setActiveChart] = React.useState("desktop");
 
-  const total = React.useMemo(() => ({
-    desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
-    mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),
-  }), []);
+  const total = React.useMemo(
+    () => ({
+      desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
+      mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),
+    }),
+    [chartData]
+  );
 
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
           <CardTitle>Mapa interactivo</CardTitle>
-          <CardDescription>
-            Valor de las acciones
-          </CardDescription>
+          <CardDescription>Valor de las acciones</CardDescription>
         </div>
         <div className="flex">
           {["desktop", "mobile"].map((key) => {
