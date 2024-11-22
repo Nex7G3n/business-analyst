@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from 'axios';
 
-export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setActions, setLoading, setError }) => {
+export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setActions, setLoading, setError, setAdvaceRatios }) => {
 
     const apiKey = 'QA2PPVULFLD4FCBN';
     const apikey_news = 'b5a3aca5a3e843cebc952c471d7cd32d';
@@ -23,6 +23,8 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
                 setBalance(financialData);
                 const calculatedRatios = calculateRatios(financialData);
                 setRatios(calculatedRatios);
+                const advaceRatios = calculateAdvancedIndicators(financialData);
+                setAdvaceRatios(advaceRatios)
             } else {
                 setBalance(null);
                 setRatios(null);
@@ -126,6 +128,76 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
     
       return ratios;
     }
+
+    const calculateAdvancedIndicators = (data) => {
+      const safeCalculate = (fn) => {
+        try {
+          return fn();
+        } catch (e) {
+          return "error";
+        }
+      };
+    
+      // UAIDI
+      const UAIDI = safeCalculate(() => {
+        return (
+          data.resultadoEjercicio +
+          data.gastosPorPagar -
+          data.resultadosAcumulados +
+          data.provisionesAsociativas
+        );
+      });
+    
+      // NOF
+      const NOF = safeCalculate(() => {
+        const activosCirculantesOperativos =
+          data.carteraCreditos +
+          data.creditosVigentes +
+          data.creditosCobranza;
+        const pasivosCirculantesOperativos =
+          data.obligacionesAsociados + data.cuentasPorPagar;
+    
+        return activosCirculantesOperativos - pasivosCirculantesOperativos;
+      });
+    
+      // NF
+      const NF = safeCalculate(() => {
+        if (NOF === "error") throw new Error("NOF calculation failed");
+        const recursosFinancierosPermanentes =
+          data.capitalSocial + data.reservas + data.resultadosAcumulados;
+    
+        return NOF - recursosFinancierosPermanentes;
+      });
+    
+      // WACC
+      const WACC = safeCalculate(() => {
+        if (data.totalActivo === 0) throw new Error("El total de activos no puede ser cero.");
+    
+        const wd = data.obligacionesPlazo / data.totalActivo; // Peso deuda
+        const wq = 1 - wd; // Peso capital
+    
+        const td = 0.07; // Tasa promedio de deuda
+        const riskFreeRate = 0.03; // Tasa libre de riesgo
+        const beta = 1.2; // Beta de la empresa
+        const marketReturn = 0.08; // Retorno del mercado
+    
+        const CAPM = riskFreeRate + beta * (marketReturn - riskFreeRate);
+        return wd * td * (1 - 0.295) + wq * CAPM;
+      });
+    
+      // EVA
+      const EVA = safeCalculate(() => {
+        if (WACC === "error" || UAIDI === "error") {
+          throw new Error("WACC or UAIDI calculation failed");
+        }
+    
+        return UAIDI - WACC * data.totalActivo;
+      });
+    
+      return { wacc: WACC, uaidi: UAIDI, eva: EVA, nof: NOF, nf: NF };
+    };
+    
+    
 
     const getArticles = async (symbol) => {
         axios.get(`https://newsapi.org/v2/everything?q=${symbol}&language=es&sortBy=publishedAt&apiKey=${apikey_news}`)

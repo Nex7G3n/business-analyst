@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+const apiKey = import.meta.env.OPENAI_API_KEY;
 import {
     Table,
     TableBody,
@@ -11,13 +11,13 @@ import {
 } from "@/components/ui/table";
 import { Separator } from "@radix-ui/react-separator";
 
-export const ChatGpt = ({ ratios, balance, news, actions }) => {
+export const ChatGpt = ({ ratios, balance, news, actions, advaceRatios }) => {
     const [interpretation, setInterpretation] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!!ratios && !!balance && !!news && !!actions) {
+        if (!!ratios && !!balance && !!news && !!actions && !!advaceRatios) {
             setLoading(true);
             setError(null);
             async function openGPT() {
@@ -38,26 +38,26 @@ export const ChatGpt = ({ ratios, balance, news, actions }) => {
                                 },
                                 {
                                     role: "user",
-                                    content: `
-                                        Aquí tienes un informe financiero:
-                                        - Balance: ${JSON.stringify(balance)}
-                                        - Noticias relevantes: ${JSON.stringify(news)}
-                                        - Acciones recientes: ${JSON.stringify(actions)}
-                                        - Ratios financieros: ${JSON.stringify(ratios)}
+                                    content: `Aquí tienes un informe financiero:
+                                    - Balance: ${JSON.stringify(balance)}
+                                    - Noticias relevantes: ${JSON.stringify(news)}
+                                    - Acciones recientes: ${JSON.stringify(actions)}
+                                    - Ratios financieros: ${JSON.stringify(ratios)}
+                                    - Ratios avanzados: ${JSON.stringify(advaceRatios)}
 
-                                        Realiza un análisis financiero detallado y proporciona una predicción clara en formato JSON con los siguientes campos:
-                                        {
-                                            "decision": "invertir" o "no invertir",
-                                            "motivos": "explicación clara",
-                                            "rentabilidad_esperada": "porcentaje",
-                                            "tiempo_estimado_retorno": "meses",
-                                            "analisis_rentabilidad": "análisis de márgenes y ROI",
-                                            "tendencia_ventas": "tendencia de ventas en el tiempo",
-                                            "analisis_deuda": "evaluación de la deuda y capacidad de pago",
-                                            "proyecciones_dividendos": "proyección de dividendos futuros"
-                                        }
-                                        No incluyas recomendaciones para investigar más, solo el análisis solicitado, devuelveme solo un array con lo que te pedi, sin estilos, necesito un formato lo mas parecido a json posible.
-                                    `,
+                                    Realiza un análisis financiero detallado y proporciona una predicción clara en formato JSON con los siguientes campos:
+                                    {
+                                        "decision": "invertir" o "no invertir",
+                                        "motivos": "explicación clara",
+                                        "rentabilidad_esperada": "porcentaje",
+                                        "tiempo_estimado_retorno": "meses",
+                                        "analisis_rentabilidad": "análisis de márgenes y ROI",
+                                        "tendencia_ventas": "tendencia de ventas en el tiempo",
+                                        "analisis_deuda": "evaluación de la deuda y capacidad de pago",
+                                        "proyecciones_dividendos": "proyección de dividendos futuros",
+                                        "impacto_ratios_avanzados": "análisis detallado basado en WACC, EVA, UAIDI, NOF y NF"
+                                    }
+                                    No incluyas recomendaciones para investigar más, solo el análisis solicitado, devuelveme solo un array con lo que te pedi, sin estilos, necesito un formato lo más parecido a JSON posible.`,
                                 },
                             ],
                         }),
@@ -85,7 +85,7 @@ export const ChatGpt = ({ ratios, balance, news, actions }) => {
 
             openGPT();
         }
-    }, [ratios, balance, news, actions]);
+    }, [ratios, balance, news, actions, advaceRatios]);
 
     if (loading) return <p>Cargando...</p>;
 
@@ -138,6 +138,10 @@ export const ChatGpt = ({ ratios, balance, news, actions }) => {
                     <TableRow>
                         <TableCell className="font-bold text-left">Proyecciones de Dividendos</TableCell>
                         <TableCell className="text-left">{interpretation.proyecciones_dividendos}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell className="font-bold text-left">Impacto de Ratios Avanzados</TableCell>
+                        <TableCell className="text-left">{interpretation.impacto_ratios_avanzados}</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

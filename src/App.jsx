@@ -3,6 +3,7 @@ import './App.css';
 import BalanceFinanciero from '@/components/Balance';
 import News from '@/components/News';
 import RatiosFinancieros from '@/components/Ratios';
+import AdvancedRatios from '@/components/AdvaceRatios'; // Importa el nuevo componente
 import { Search } from '@/components/Search';
 import { ChatGpt } from '@/components/ChatGpt';
 import { Actions } from '@/components/Actions';
@@ -22,6 +23,7 @@ function App() {
   const [ratios, setRatios] = useState(null);
   const [news, setNews] = useState(null);
   const [actions, setActions] = useState(null);
+  const [advaceRatios, setAdvaceRatios] = useState(null);
 
   return (
     <div className="p-6 space-y-10">
@@ -43,6 +45,7 @@ function App() {
         setActions={setActions} 
         setLoading={setLoading}
         setError={setError}
+        setAdvaceRatios={setAdvaceRatios}
       />
 
       {/* Secciones condicionales */}
@@ -59,6 +62,12 @@ function App() {
         </div>
       )}  
 
+      {(loading || advaceRatios) && (
+        <div className="border p-4 rounded-xl shadow-md">
+          <AdvancedRatios advanceRatios={advaceRatios} loading={loading} />
+        </div>
+      )}
+
       {(loading || actions || news || ratios || balance) && (
         <div className="border p-4 rounded-xl shadow-md">
           <ChatGpt 
@@ -66,6 +75,7 @@ function App() {
             news={news} 
             ratios={ratios} 
             balance={balance} 
+            advaceRatios={advaceRatios}
           />
         </div>
       )}
@@ -76,7 +86,7 @@ function App() {
         </div>
       )}
 
-      {(!loading && !actions && !news && !ratios && !balance) && (
+      {(!loading && !actions && !news && !ratios && !balance && !advaceRatios) && (
         <div className="grid gap-4 grid-cols-2">
           <RatiosCalculator />
           <ApalancamientoCalculator />
