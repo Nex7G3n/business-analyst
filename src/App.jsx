@@ -12,6 +12,7 @@ import { EVACalculator } from './components/EvaCalculator';
 import { ApalancamientoCalculator } from './components/ApalancamientoCalculator';
 import EbitdaCalculator from './components/Ebitda';
 import { BondCalculator } from './components/BondCalculator';
+import NofFmCalculator from './components/NofFmCalculator';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -83,6 +84,7 @@ function App() {
           <WaccCalculator />
           <EbitdaCalculator />
           <BondCalculator />
+          <NofFmCalculator />
         </div>
       )}
     </div>

@@ -35,7 +35,6 @@ const chartConfig = {
 
 export function Actions({ chartData, loading }) {
   if (loading) {
-    // Mostrar Skeleton mientras carga
     return (
       <Card className="w-full">
         <CardHeader>
@@ -50,7 +49,6 @@ export function Actions({ chartData, loading }) {
   }
 
   if (!chartData) {
-    // Si no hay datos, no mostrar nada
     return null;
   }
 

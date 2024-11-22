@@ -144,12 +144,6 @@ function EbitdaCalculator() {
                         </Card>
                     )}
                 </div>
-
-                <DialogFooter>
-                    <Button variant="secondary" onClick={() => setIsOpen(false)}>
-                        Cerrar
-                    </Button>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
