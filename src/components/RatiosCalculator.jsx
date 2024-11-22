@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react";
 import { calculateRatios } from "@/utils/calculator";
 import FinancialPieChart from "./Torta";
+import { Calculator } from 'lucide-react'; // Usa una librería como Lucide para íconos SVG
 
 export function RatiosCalculator() {
     const [activoCorriente, setActivoCorriente] = useState('');
@@ -26,7 +27,15 @@ export function RatiosCalculator() {
     return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Calcular Ratios Financieros</Button>
+        <Button variant="outline" className="w-full py-8">
+          <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
+            <Calculator className="w-10 h-10 text-blue-600" />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="text-lg font-bold text-gray-800">Calcular Ratios Financieros</span>
+            <span className="text-sm text-gray-500">Obtén análisis detallado de tu estado financiero</span>
+          </div>
+        </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]"> {/* Aumentamos la altura mínima */}
         <div className="w-1/2">

@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react";
 import { calculateWacc } from "@/utils/calculator";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PieChart as Pie_Chart } from 'lucide-react'; // Ícono representativo, puedes cambiarlo según tu preferencia
 
 
 export function WaccCalculator() {
@@ -37,9 +38,17 @@ export function WaccCalculator() {
     return (
     <Dialog>    
       <DialogTrigger asChild>
-        <Button variant="outline">Calcular WACC</Button>
+      <Button variant="outline" className="w-full py-8">
+        <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
+                <Pie_Chart className="w-10 h-10 text-red-600" /> 
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-lg font-bold text-gray-800">Calcular WACC</span>
+                <span className="text-sm text-gray-500">Determina el costo promedio ponderado de capital</span>
+              </div>
+            </Button>
       </DialogTrigger>
-      <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]"> {/* Aumentamos la altura mínima */}
+      <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         <div className="w-1/2">
           <DialogHeader>
             <DialogTitle>Calculadora de WACC</DialogTitle>

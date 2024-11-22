@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { calculateEVA } from "@/utils/evacalculator";
+import { BarChart } from 'lucide-react'; 
 
 export function EVACalculator() {
     const [TeaC, setTeaC] = useState('');
@@ -41,7 +42,15 @@ export function EVACalculator() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline">Calcular EVA</Button>
+                <Button variant="outline" className="w-full py-8">
+                <div className="flex items-center bg-gray-200 rounded-full p-3">
+                        <BarChart className="w-10 h-10 text-purple-600" /> {/* Ícono grande */}
+                    </div>
+                    <div className="flex flex-col text-left">
+                        <span className="text-lg font-bold text-gray-800">Calcular EVA</span>
+                        <span className="text-sm text-gray-500">Analiza el valor económico agregado de tu empresa</span>
+                    </div>
+                </Button>
             </DialogTrigger>
             <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
                 <div className="w-full">

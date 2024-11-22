@@ -21,7 +21,7 @@ import {
   Legend,
 } from "chart.js";
 
-// Registrar componentes de Chart.js
+import { TrendingUp } from 'lucide-react';  
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export function ApalancamientoCalculator() {
@@ -80,7 +80,16 @@ export function ApalancamientoCalculator() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Calcular Apalancamiento</Button>
+      <Button variant="outline" className="w-full py-8">
+          <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
+                <TrendingUp className="w-10 h-10 text-green-600" />
+            </div>
+
+            <div className="flex flex-col text-left">
+                <span className="text-lg font-bold text-gray-800">Calcular Apalancamiento</span>
+                <span className="text-sm text-gray-500">Evalúa el nivel de deuda frente a tus recursos</span>
+            </div>
+        </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         <div className="w-full">

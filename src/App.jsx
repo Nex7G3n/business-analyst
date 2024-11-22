@@ -7,7 +7,7 @@ import { Search } from '@/components/Search';
 import { ChatGpt } from '@/components/ChatGpt';
 import { Actions } from '@/components/Actions';
 import { RatiosCalculator } from '@/components/RatiosCalculator';
-import FinancialPieChart from './components/Torta';
+import { WaccCalculator } from './components/WaccCalculator';
 import { EVACalculator } from './components/EvaCalculator';
 import { ApalancamientoCalculator } from './components/ApalancamientoCalculator';
 
@@ -24,6 +24,15 @@ function App() {
 
   return (
     <div className="p-6 space-y-10">
+      <header className="text-center space-y-4">
+        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500 drop-shadow-lg">
+          Dashboard Financiero
+        </h1>
+        <p className="text-lg text-gray-600">
+          Realiza cálculos financieros avanzados y consulta datos relevantes en tiempo real.
+        </p>
+      </header>
+
       <Search 
         symbol={symbol} 
         setSymbol={setSymbol} 
@@ -34,6 +43,8 @@ function App() {
         setLoading={setLoading}
         setError={setError}
       />
+
+      {/* Secciones condicionales */}
       {(loading || ratios || actions) && (
         <div className="flex space-x-6">
           <RatiosFinancieros ratios={ratios} loading={loading} error={error} />
@@ -65,10 +76,11 @@ function App() {
       )}
 
       {(!loading || !actions || !news || !ratios || !balance) && (
-        <div className="">
+        <div className="grid gap-4 grid-cols-2">
           <RatiosCalculator />
           <ApalancamientoCalculator />
           <EVACalculator />
+          <WaccCalculator />
         </div>
       )}
     </div>
