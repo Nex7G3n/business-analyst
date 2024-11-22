@@ -1,7 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-function FinancialPieChart({ totalActivo, totalPasivo, capitalPropio, beneficioNeto, activoCorriente, pasivoCorriente, ventasTotales}) {
+export function FinancialPieChart({ totalActivo, totalPasivo, capitalPropio, beneficioNeto, activoCorriente, pasivoCorriente, ventasTotales}) {
   const data = [
     { name: 'Activo Corriente', value: parseFloat(activoCorriente) || 0 },
     { name: 'Pasivo Corriente', value: parseFloat(pasivoCorriente) || 0 },
@@ -40,5 +40,4 @@ function FinancialPieChart({ totalActivo, totalPasivo, capitalPropio, beneficioN
     </div>
   );
 }
-
 export default FinancialPieChart;

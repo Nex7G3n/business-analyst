@@ -8,6 +8,7 @@ import { ChatGpt } from '@/components/ChatGpt';
 import { Actions } from '@/components/Actions';
 import { RatiosCalculator } from '@/components/RatiosCalculator'
 import FinancialPieChart from './components/Torta';
+import { WaccCalculator } from './components/WaccCalculator';
 
 function App() {
   const [symbol, setSymbol] = useState('');
@@ -19,6 +20,7 @@ function App() {
   return (
     <div className="p-6 space-y-10"> {/* Espaciado vertical entre secciones */}
       <RatiosCalculator />
+      <WaccCalculator/>
       <Search 
         symbol={symbol} 
         setSymbol={setSymbol} 
@@ -38,7 +40,6 @@ function App() {
       <div className="border p-4 rounded-xl shadow-sm">
         <BalanceFinanciero balance={balance} />
       </div>
-
 
       <div className="border p-4 rounded-xl shadow-md">
         <ChatGpt 
