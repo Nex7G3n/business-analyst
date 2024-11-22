@@ -17,7 +17,6 @@ import {
 
 export const description = "An interactive bar chart";
 
-
 const chartConfig = {
   views: {
     label: "Valor de las acciones",

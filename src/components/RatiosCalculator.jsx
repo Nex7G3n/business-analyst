@@ -23,7 +23,6 @@ export function RatiosCalculator() {
     const [ventasTotales, setVentasTotales] = useState(''); // Para los nuevos ratios
     const [ratios, setRatios] = useState(null); // Aquí es donde setRatios debe estar correctamente definido
 
-
     return (
     <Dialog>
       <DialogTrigger asChild>

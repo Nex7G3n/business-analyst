@@ -3,7 +3,7 @@ import { parse } from "postcss";
 export const calculateRatios = (activoCorriente, pasivoCorriente, totalPasivo, totalActivo, beneficioNeto, capitalPropio, ventasTotales, setRatios) => {
     if (!activoCorriente || !pasivoCorriente || !totalPasivo || !totalActivo || !beneficioNeto || !capitalPropio || !ventasTotales) {
         alert("Por favor, introduce todos los valores.");
-        return null;  // Retorna null si no se proporcionan todos los valores
+        return null;
     }
 
     const ratioLiquidez = parseFloat(activoCorriente) / parseFloat(pasivoCorriente);
