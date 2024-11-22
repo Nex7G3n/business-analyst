@@ -11,7 +11,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { useState } from "react";
 import { calculateWacc } from "@/utils/calculator";
-import WaccPieChart from "./Torta";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 export function WaccCalculator() {
     const [componentesWacc,setComponentesWacc] = useState(null);
@@ -176,7 +177,11 @@ export function WaccCalculator() {
                 <p><strong>CAPM: </strong>{componentesWacc.capm}</p>
                 <p><strong>Costo de deuda: </strong>{componentesWacc.kd}</p>
               </div>
-              
+              <WaccPieChart
+                  className="w-full h-full"
+                  totalPatrimonio={patrimonio}
+                  totalPasivo={componentesWacc.totalPasivo}
+                />
             </div>
           ) : (
             <p>Por favor, introduce los valores necesarios.</p>
@@ -186,4 +191,38 @@ export function WaccCalculator() {
       </DialogContent>
     </Dialog>
   )
+}
+
+function WaccPieChart({ totalPatrimonio, totalPasivo }) {
+  const data = [
+    { name: 'Total Patrimonio', value: parseFloat(totalPatrimonio) || 0 },
+    { name: 'Total Pasivo', value: parseFloat(totalPasivo) || 0 },
+  ];
+
+  const COLORS = ['#0088FE', '#FF8042'];
+
+  return (
+    <div style={{ width: '100%', height: 300 }}>
+      <ResponsiveContainer>
+        <PieChart>
+          <Pie
+            data={data}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={100}
+            fill="#8884d8"
+            label
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }
