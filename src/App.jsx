@@ -11,6 +11,7 @@ import { WaccCalculator } from './components/WaccCalculator';
 import { EVACalculator } from './components/EvaCalculator';
 import { ApalancamientoCalculator } from './components/ApalancamientoCalculator';
 import EbitdaCalculator from './components/Ebitda';
+import { BondCalculator } from './components/BondCalculator';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -20,9 +21,7 @@ function App() {
   const [ratios, setRatios] = useState(null);
   const [news, setNews] = useState(null);
   const [actions, setActions] = useState(null);
-
-  const hasSearched = symbol !== '';
-
+  
   return (
     <div className="p-6 space-y-10">
       <header className="text-center space-y-4">
@@ -83,6 +82,7 @@ function App() {
           <EVACalculator />
           <WaccCalculator />
           <EbitdaCalculator />
+          <BondCalculator />
         </div>
       )}
     </div>
