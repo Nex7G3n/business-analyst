@@ -20,6 +20,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { Briefcase, DollarSign } from "lucide-react";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -93,8 +94,15 @@ export function BondCalculator() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-full py-8">
-          <span className="text-lg font-bold">Calculadora de Bonos</span>
+        <Button variant="none" className="w-full py-8">
+            <div className="flex bg-gray-200 rounded-full p-3">
+                <Briefcase className="w-10 h-10 text-purple-600" />
+            </div>
+
+            <div className="flex flex-col text-left">
+                <span className="text-lg font-bold text-gray-800">Calcular Bonos</span>
+                <span className="text-sm text-gray-500">Analiza el rendimiento de tus inversiones en bonos</span>
+            </div>
         </Button>
       </DialogTrigger>
       <DialogContent className="p-8">

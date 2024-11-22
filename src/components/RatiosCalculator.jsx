@@ -27,7 +27,7 @@ export function RatiosCalculator() {
     return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-full py-8">
+        <Button variant="none" className="w-full py-8">
           <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
             <Calculator className="w-10 h-10 text-blue-600" />
           </div>

@@ -80,8 +80,8 @@ export function ApalancamientoCalculator() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-      <Button variant="outline" className="w-full py-8">
-          <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
+      <Button variant="none" className="w-full py-8">
+          <div className="flex bg-gray-200 rounded-full p-3">
                 <TrendingUp className="w-10 h-10 text-green-600" />
             </div>
 

@@ -21,7 +21,7 @@ function App() {
   const [ratios, setRatios] = useState(null);
   const [news, setNews] = useState(null);
   const [actions, setActions] = useState(null);
-  
+
   return (
     <div className="p-6 space-y-10">
       <header className="text-center space-y-4">
@@ -75,7 +75,7 @@ function App() {
         </div>
       )}
 
-      {(!loading || !actions || !news || !ratios || !balance) && (
+      {(!loading && !actions && !news && !ratios && !balance) && (
         <div className="grid gap-4 grid-cols-1 w-3/5 mx-auto">
           <RatiosCalculator />
           <ApalancamientoCalculator />

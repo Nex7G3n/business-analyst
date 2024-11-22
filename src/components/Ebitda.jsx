@@ -82,12 +82,12 @@ function EbitdaCalculator() {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-            <Button variant="outline" className="w-full py-8">
+            <Button variant="none" className="w-full py-8">
                 <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
                     <DollarSign className="w-10 h-10 text-blue-600" />
                 </div>
 
-                <div className="flex flex-col text-left pl-4">
+                <div className="flex flex-col text-left">
                     <span className="text-lg font-bold text-gray-800">Calcular EBITDA</span>
                     <span className="text-sm text-gray-500">Calcula las ganancias antes de intereses, impuestos, depreciación y amortización</span>
                 </div>
