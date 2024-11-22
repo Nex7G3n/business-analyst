@@ -76,7 +76,7 @@ function App() {
       )}
 
       {(!loading && !actions && !news && !ratios && !balance) && (
-        <div className="grid gap-4 grid-cols-1 w-3/5 mx-auto">
+        <div className="grid gap-4 grid-cols-2">
           <RatiosCalculator />
           <ApalancamientoCalculator />
           <EVACalculator />
