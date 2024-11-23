@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const apiKey = import.meta.env.OPENAI_API_KEY;
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 import {
     Table,
     TableBody,
@@ -63,6 +63,7 @@ export const ChatGpt = ({ ratios, balance, news, actions, advaceRatios }) => {
                         }),
                     });
                     const data = await response.json();
+                    console.log(data)
 
                     if (data && data.choices) {
                         const rawContent = data.choices[0].message.content.trim();
