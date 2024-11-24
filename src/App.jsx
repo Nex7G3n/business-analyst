@@ -5,7 +5,7 @@ import News from '@/components/News';
 import RatiosFinancieros from '@/components/Ratios';
 import AdvancedRatios from '@/components/AdvaceRatios'; // Importa el nuevo componente
 import { Search } from '@/components/Search';
-import { ChatGpt } from '@/components/ChatGpt';
+import { ChatGpt } from '@/components/ChatGPT';
 import { Actions } from '@/components/Actions';
 import { RatiosCalculator } from '@/components/RatiosCalculator';
 import { WaccCalculator } from './components/WaccCalculator';
