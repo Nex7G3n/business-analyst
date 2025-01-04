@@ -209,37 +209,7 @@ export const Search = ({ symbol, setSymbol, setBalance, setRatios, setNews, setA
             console.error('Error al hacer la solicitud de noticias:', error);
         });
     }
-
-    function predictFuture(data) {
-      if (!data || !data['Time Series (Daily)']) {
-        return 'Datos insuficientes para hacer una predicción';
-      }
-  
-      const timeSeries = data['Time Series (Daily)'];
-      const closingPrices = Object.keys(timeSeries).map(date => parseFloat(timeSeries[date]['4. close']));
-  
-      if (closingPrices.length < 2) {
-        return 'No hay suficientes datos históricos para hacer una predicción';
-      }
-  
-      let risingCount = 0;
-      let fallingCount = 0;
-  
-      for (let i = 0; i < closingPrices.length - 1; i++) {
-        if (closingPrices[i] > closingPrices[i + 1]) {
-          risingCount++;
-        } else {
-          fallingCount++;
-        }
-      }
-  
-      if (risingCount > fallingCount) {
-        return 'Subirá';
-      } else {
-        return 'Bajará';
-      }
-    }
-  
+    
     async function getActions(symbol) {
       try {
         const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey}`);
