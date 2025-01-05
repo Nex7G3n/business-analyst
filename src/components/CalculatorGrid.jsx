@@ -5,11 +5,15 @@ import { BondCalculator } from "./calculators/BondCalculator";
 import { EVACalculator } from './calculators/EvaCalculator';
 import { ApalancamientoCalculator } from './calculators/ApalancamientoCalculator';
 import { EbitdaCalculator } from './calculators/EbitdaCalculator';
+import { useSearch } from "@/context/search.context";
+import { Search } from './Search';
 
 
 export const CalculatorGrid = () => {
+  const { searchData } = useSearch();
   return (
-    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 my-4">
+    searchData.state == "No Search" ? (
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 my-4">
         <NofFmCalculator />
         <WaccCalculator />
         <RatiosCalculator /> 
@@ -17,6 +21,8 @@ export const CalculatorGrid = () => {
         <EVACalculator />
         <ApalancamientoCalculator />
         <EbitdaCalculator />
-    </div>
+    </div> ) : (
+      <></>
+    )
   )
 }

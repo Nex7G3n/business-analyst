@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Skeleton } from './ui/skeleton';
@@ -6,17 +6,22 @@ import { Button } from './ui/button';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from './ui/dialog';
 import { Pagination } from '@/components/ui/pagination';
 
-function News({ news, loading }) {
-  const [currentPage, setCurrentPage] = useState(1);
+function News() {
   const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = news ? news.slice(indexOfFirstItem, indexOfLastItem) : [];
   const totalPages = news ? Math.ceil(news.length / itemsPerPage) : 0;
 
-  if (loading) {
-    // Mostrar Skeleton mientras se cargan las noticias
+  const { searchData } = useSearch();
+
+  useEffect(() => {
+    console.log(searchData.data);
+  }, [searchData]);
+
+  if (searchData.state == 'Loading') {
     return (
       <div className="p-6 grid gap-6">
         <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gray-900 drop-shadow-lg">

@@ -5,10 +5,26 @@ import { getArticles } from "../services/news.service";
 const SearchContext = createContext()
 
 export const SearchProvider = ({ children }) => {
-  const [searchData, setSearchData] = useState("");
+  const [searchData, setSearchData] = useState({
+    state: "No Search"
+  });
 
   const executeSearch = (query) => {
-    console.log("Buscando: ", query);
+    if(query === "") {
+      setSearchData({state: "No Search"})
+    } else {
+      setSearchData({state: "Searching"})
+
+      getArticles(query).then((data) => {
+        setSearchData({state: "Search Results", data: {
+          articles: data
+        }})
+      }).catch((error) => {
+        setSearchData({state: "Error", data: {
+          error: error
+        }})
+      });
+    }
   };
 
   return (
