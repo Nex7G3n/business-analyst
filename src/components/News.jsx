@@ -23,7 +23,7 @@ function News() {
   const [currentPage, setCurrentPage] = useState(1);
   const { searchData } = useSearch();
   
-  if (searchData.state === "No Search") return <div>No hay búsqueda realizada</div>;
+  if (searchData.state === "No Search") return <></>;
   
   const itemsPerPage = 6;
   const indexOfLastItem = currentPage * itemsPerPage;
