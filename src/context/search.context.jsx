@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import PropTypes from 'prop-types';
 import { getArticles } from "../services/news.service";
 
 
@@ -33,6 +34,9 @@ export const SearchProvider = ({ children }) => {
   </SearchContext.Provider>
 )};
 
+SearchProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export const useSearch = () => {
     const context = useContext(SearchContext);

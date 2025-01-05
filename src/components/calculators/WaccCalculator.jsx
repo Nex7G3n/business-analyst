@@ -20,7 +20,7 @@ import {
 } from "recharts";
 import { PieChart as Pie_Chart } from "lucide-react";
 import { CalculatorButton } from "./CalculatorButton";
-
+import PropTypes from 'prop-types'
 export const WaccCalculator = () => {
   const [inputs, setInputs] = useState({
     patrimonio: "",
@@ -301,4 +301,10 @@ function WaccPieChart({ totalPatrimonio, totalPasivo }) {
       </ResponsiveContainer>
     </div>
   );
+}
+
+
+WaccPieChart.propTypes = {
+  totalPatrimonio: PropTypes.number,
+  totalPasivo: PropTypes.number
 }

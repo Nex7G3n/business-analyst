@@ -1,5 +1,6 @@
 import { Button } from "../ui/button";
 import { DialogTrigger } from "../ui/dialog";
+import PropTypes from 'prop-types';
 
 export const CalculatorButton = ({ title, description, icon: Icon }) => {
   return (
@@ -21,3 +22,10 @@ export const CalculatorButton = ({ title, description, icon: Icon }) => {
     </DialogTrigger>
   );
 };
+
+
+CalculatorButton.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  icon: PropTypes.elementType
+}

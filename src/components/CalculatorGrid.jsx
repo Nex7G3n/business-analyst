@@ -6,7 +6,6 @@ import { EVACalculator } from './calculators/EvaCalculator';
 import { ApalancamientoCalculator } from './calculators/ApalancamientoCalculator';
 import { EbitdaCalculator } from './calculators/EbitdaCalculator';
 import { useSearch } from "@/context/search.context";
-import { Search } from './Search';
 
 
 export const CalculatorGrid = () => {
