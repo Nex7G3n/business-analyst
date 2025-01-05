@@ -2,6 +2,7 @@ import './App.css';
 import { CalculatorGrid } from './components/CalculatorGrid';
 import { Search } from './components/Search';
 import { SearchProvider } from './context/search.context';
+import { EnterprisePage } from './pages/Enterprise';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         </header>
         <main>
           <CalculatorGrid /> 
+          <EnterprisePage />
         </main>
       </div>
     </SearchProvider>

@@ -14,16 +14,19 @@ export const SearchProvider = ({ children }) => {
     if(query === "") {
       setSearchData({state: "No Search"})
     } else {
-      setSearchData({state: "Searching"})
+      setSearchData({state: "Loading"})
+      console.log("Searching for: ", query)
 
       getArticles(query).then((data) => {
-        setSearchData({state: "Search Results", data: {
+        setSearchData({state: "Ok", data: {
           articles: data
         }})
+        console.log("Data: ", data)
       }).catch((error) => {
         setSearchData({state: "Error", data: {
           error: error
         }})
+        console.log("Error: ", error)
       });
     }
   };
