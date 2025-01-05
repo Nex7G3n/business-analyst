@@ -9,7 +9,7 @@ import { EbitdaCalculator } from './calculators/EbitdaCalculator';
 
 export const CalculatorGrid = () => {
   return (
-    <div className="grid gap-4 grid-cols-2 my-4">
+    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 my-4">
         <NofFmCalculator />
         <WaccCalculator />
         <RatiosCalculator /> 

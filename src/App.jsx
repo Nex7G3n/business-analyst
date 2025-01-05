@@ -7,19 +7,20 @@ import ScrollingText from './components/Test';
 function App() {
   return (
     <SearchProvider>
-      <div className="p-6 space-y-10">
-        <header className="text-center space-y-4">
+      <div className="space-y-10">
+        <header className="text-center space-y-4 w-full">
           <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500 drop-shadow-lg">
             Dashboard Financiero
           </h1>
           <p className="text-lg text-gray-600">
             Realiza cálculos financieros avanzados y consulta datos relevantes en tiempo real.
           </p>
+          <Search />
         </header>
+        <main>
+          <CalculatorGrid /> 
+        </main>
       </div>
-      <Search />
-      <ScrollingText />
-      <CalculatorGrid />
     </SearchProvider>
   );
 }
