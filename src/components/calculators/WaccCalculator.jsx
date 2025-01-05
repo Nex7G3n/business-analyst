@@ -6,7 +6,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -42,9 +41,7 @@ export const WaccCalculator = () => {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <CalculatorButton title="Calcular WACC" description="Analiza el costo promedio ponderado de capital de tu empresa" icon={Pie_Chart} />
-      </DialogTrigger>
+      <CalculatorButton title="Calcular WACC" description="Analiza el costo promedio ponderado de capital de tu empresa" icon={Pie_Chart} />
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         <div className="w-1/2">
           <DialogHeader>

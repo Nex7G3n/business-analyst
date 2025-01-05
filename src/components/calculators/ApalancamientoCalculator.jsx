@@ -6,7 +6,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -20,7 +19,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Calculator, TrendingUp } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 import { CalculatorButton } from "./CalculatorButton";
 
 ChartJS.register(
@@ -98,9 +97,7 @@ export function ApalancamientoCalculator() {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <CalculatorButton title="Calculadora de Apalancamiento" description="Calcula los grados de apalancamiento de tu empresa" icon={TrendingUp} />
-      </DialogTrigger>
+      <CalculatorButton title="Calculadora de Apalancamiento" description="Calcula los grados de apalancamiento de tu empresa" icon={TrendingUp} />
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         <div className="w-full">
           <DialogHeader>

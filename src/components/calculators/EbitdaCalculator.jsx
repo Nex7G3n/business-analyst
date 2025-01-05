@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,10 +6,8 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Bar } from "react-chartjs-2";
 import {
@@ -140,9 +138,7 @@ export const EbitdaCalculator = () => {
 
   return (
     <Dialog>
-      <DialogTrigger>
         <CalculatorButton title="Calculadora de EBITDA" description="Selecciona un método y calcula el EBITDA." icon={DollarSign} />
-      </DialogTrigger>
       <DialogContent className="p-6 space-y-6">
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold">

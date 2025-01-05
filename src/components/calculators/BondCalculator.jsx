@@ -7,7 +7,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Bar } from "react-chartjs-2";
@@ -107,9 +106,7 @@ export function BondCalculator() {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <CalculatorButton title="Calculadora de Bonos" description="Calcula las propiedades de un bono." icon={Briefcase} />
-      </DialogTrigger>
+      <CalculatorButton title="Calculadora de Bonos" description="Calcula las propiedades de un bono." icon={Briefcase} />
       <DialogContent className="p-8">
         <DialogHeader>
           <DialogTitle>Calculadora de Bonos</DialogTitle>

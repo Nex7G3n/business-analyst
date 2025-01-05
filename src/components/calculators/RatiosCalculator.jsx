@@ -6,7 +6,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -29,9 +28,7 @@ export const RatiosCalculator = () => {
 
   return (
     <Dialog>
-      <DialogTrigger>
         <CalculatorButton title="Calcular Ratios Financieros" description="Obtén análisis detallado de tu estado financiero" icon={Calculator} />
-      </DialogTrigger>
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         {" "}
         <div className="w-1/2">
