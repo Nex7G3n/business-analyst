@@ -1,5 +1,3 @@
-import { parse } from "postcss";
-
 export const calculateRatios = (activoCorriente, pasivoCorriente, totalPasivo, totalActivo, beneficioNeto, capitalPropio, ventasTotales, setRatios) => {
     if (!activoCorriente || !pasivoCorriente || !totalPasivo || !totalActivo || !beneficioNeto || !capitalPropio || !ventasTotales) {
         alert("Por favor, introduce todos los valores.");
