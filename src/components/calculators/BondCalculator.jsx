@@ -22,36 +22,47 @@ import {
 } from "chart.js";
 import { Briefcase, DollarSign } from "lucide-react";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export function BondCalculator() {
-  const [nominal, setNominal] = useState('');
-  const [couponRate, setCouponRate] = useState('');
-  const [years, setYears] = useState('');
-  const [marketRate, setMarketRate] = useState('');
-  const [result, setResult] = useState(null);
+  const [inputs, setInputs] = useState({
+    nominal: "",
+    couponRate: "",
+    years: "",
+    marketRate: "",
+  });
+
+  const [results, setResults] = useState({
+    price: null,
+    duration: null,
+    convexity: null,
+  });
 
   const handleCalculate = () => {
-    const nominalValue = parseFloat(nominal);
-    const coupon = (parseFloat(couponRate) / 100) * nominalValue;
-    const rate = parseFloat(marketRate) / 100;
-    const n = parseInt(years);
+    const nominalValue = parseFloat(inputs.nominal);
+    const coupon = (parseFloat(inputs.couponRate) / 100) * nominalValue;
+    const rate = parseFloat(inputs.marketRate) / 100;
+    const n = parseInt(inputs.years);
 
-    // Cálculo del precio del bono
     let price = 0;
     for (let i = 1; i <= n; i++) {
       price += coupon / Math.pow(1 + rate, i);
     }
     price += nominalValue / Math.pow(1 + rate, n);
 
-    // Duración (Macaulay)
     let duration = 0;
     for (let i = 1; i <= n; i++) {
       duration += (i * (coupon / Math.pow(1 + rate, i))) / price;
     }
     duration += (n * (nominalValue / Math.pow(1 + rate, n))) / price;
 
-    // Convexidad
     let convexity = 0;
     for (let i = 1; i <= n; i++) {
       convexity += (i * (i + 1) * (coupon / Math.pow(1 + rate, i))) / price;
@@ -59,7 +70,7 @@ export function BondCalculator() {
     convexity += (n * (n + 1) * (nominalValue / Math.pow(1 + rate, n))) / price;
     convexity /= Math.pow(1 + rate, 2);
 
-    setResult({
+    setResults({
       price: price.toFixed(2),
       duration: duration.toFixed(2),
       convexity: convexity.toFixed(2),
@@ -71,7 +82,9 @@ export function BondCalculator() {
     datasets: [
       {
         label: "Características del bono",
-        data: result ? [result.price, result.duration, result.convexity] : [0, 0, 0],
+        data: results
+          ? [results.price, results.duration, results.convexity]
+          : [0, 0, 0],
         backgroundColor: ["#4CAF50", "#2196F3", "#FF5722"],
         borderWidth: 1,
       },
@@ -95,21 +108,26 @@ export function BondCalculator() {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="none" className="w-full py-8">
-            <div className="flex bg-gray-200 rounded-full p-3">
-                <Briefcase className="w-10 h-10 text-purple-600" />
-            </div>
+          <div className="flex bg-gray-200 rounded-full p-3">
+            <Briefcase className="w-10 h-10 text-purple-600" />
+          </div>
 
-            <div className="flex flex-col text-left">
-                <span className="text-lg font-bold text-gray-800">Calcular Bonos</span>
-                <span className="text-sm text-gray-500">Analiza el rendimiento de tus inversiones en bonos</span>
-            </div>
+          <div className="flex flex-col text-left">
+            <span className="text-lg font-bold text-gray-800">
+              Calcular Bonos
+            </span>
+            <span className="text-sm text-gray-500">
+              Analiza el rendimiento de tus inversiones en bonos
+            </span>
+          </div>
         </Button>
       </DialogTrigger>
       <DialogContent className="p-8">
         <DialogHeader>
           <DialogTitle>Calculadora de Bonos</DialogTitle>
           <DialogDescription>
-            Introduce los valores necesarios para calcular las propiedades de un bono.
+            Introduce los valores necesarios para calcular las propiedades de un
+            bono.
           </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-2 gap-6 mt-4">
@@ -118,8 +136,10 @@ export function BondCalculator() {
             <Input
               type="number"
               placeholder="1000"
-              value={nominal}
-              onChange={(e) => setNominal(e.target.value)}
+              value={inputs.nominal}
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, nominal: e.target.value }))
+              }
             />
           </div>
           <div>
@@ -127,8 +147,10 @@ export function BondCalculator() {
             <Input
               type="number"
               placeholder="5"
-              value={couponRate}
-              onChange={(e) => setCouponRate(e.target.value)}
+              value={inputs.couponRate}
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, couponRate: e.target.value }))
+              }
             />
           </div>
           <div>
@@ -136,8 +158,10 @@ export function BondCalculator() {
             <Input
               type="number"
               placeholder="10"
-              value={years}
-              onChange={(e) => setYears(e.target.value)}
+              value={inputs.years}
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, years: e.target.value }))
+              }
             />
           </div>
           <div>
@@ -145,8 +169,10 @@ export function BondCalculator() {
             <Input
               type="number"
               placeholder="3"
-              value={marketRate}
-              onChange={(e) => setMarketRate(e.target.value)}
+              value={inputs.marketRate}
+              onChange={(e) =>
+                setInputs((prev) => ({ ...prev, marketRate: e.target.value }))
+              }
             />
           </div>
         </div>
@@ -155,12 +181,18 @@ export function BondCalculator() {
             Calcular
           </Button>
         </DialogFooter>
-        {result && (
+        {results.price !== null && (
           <div className="mt-4">
             <div className="p-4 border rounded bg-gray-100">
-              <p><strong>Precio del Bono:</strong> {result.price}</p>
-              <p><strong>Duración:</strong> {result.duration}</p>
-              <p><strong>Convexidad:</strong> {result.convexity}</p>
+              <p>
+                <strong>Precio del Bono:</strong> {results.price}
+              </p>
+              <p>
+                <strong>Duración:</strong> {results.duration}
+              </p>
+              <p>
+                <strong>Convexidad:</strong> {results.convexity}
+              </p>
             </div>
             <div className="mt-4">
               <Bar data={chartData} options={chartOptions} />

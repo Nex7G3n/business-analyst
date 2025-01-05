@@ -1,19 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSearch } from "@/context/search.context";
+import { useState } from "react";
 
 export const Search = () => {
-  const { searchData, setSearchData } = useSearch();
+  const [ query, setQuery ] = useState("");
+  const { executeSearch } = useSearch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    executeSearch(query);
+  };
 
   return (
     <form
       className="flex w-full items-center justify-center space-x-4"
+      onSubmit={handleSubmit}
     >
       <div className="relative w-full max-w-lg">
         <Input
           type="text"
           placeholder="Introduce un término o símbolo..."
           className="w-full rounded-md border border-gray-300 shadow-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
           <svg
