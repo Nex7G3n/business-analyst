@@ -2,6 +2,7 @@ import './App.css';
 import { CalculatorGrid } from './components/CalculatorGrid';
 import { Search } from './components/Search';
 import { SearchProvider } from './context/search.context';
+import ScrollingText from './components/Test';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         </header>
       </div>
       <Search />
+      <ScrollingText />
       <CalculatorGrid />
     </SearchProvider>
   );

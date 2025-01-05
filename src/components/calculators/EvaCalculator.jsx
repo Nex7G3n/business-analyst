@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { calculateEVA } from "@/utils/evacalculator";
 import { BarChart } from 'lucide-react';
+import { CalculatorButton } from './CalculatorButton';
 
 export const EVACalculator = () => {
   const [inputs, setInputs] = useState({
@@ -54,16 +55,8 @@ export const EVACalculator = () => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="none" className="w-full py-8">
-          <div className="flex items-center bg-gray-200 rounded-full p-3">
-            <BarChart className="w-10 h-10 text-purple-600" />
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="text-lg font-bold text-gray-800">Calcular EVA</span>
-            <span className="text-sm text-gray-500">Analiza el valor económico agregado de tu empresa</span>
-          </div>
-        </Button>
+      <DialogTrigger>
+        <CalculatorButton title="Calcular EVA" description="Analiza el valor económico agregado de tu empresa" icon={BarChart} />
       </DialogTrigger>
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         <div className="w-full">

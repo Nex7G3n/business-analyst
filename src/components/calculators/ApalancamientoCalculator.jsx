@@ -20,7 +20,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { TrendingUp } from "lucide-react";
+import { Calculator, TrendingUp } from "lucide-react";
+import { CalculatorButton } from "./CalculatorButton";
 
 ChartJS.register(
   CategoryScale,
@@ -97,21 +98,8 @@ export function ApalancamientoCalculator() {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="none" className="w-full py-8">
-          <div className="flex bg-gray-200 rounded-full p-3">
-            <TrendingUp className="w-10 h-10 text-green-600" />
-          </div>
-
-          <div className="flex flex-col text-left">
-            <span className="text-lg font-bold text-gray-800">
-              Calcular Apalancamiento
-            </span>
-            <span className="text-sm text-gray-500">
-              Evalúa el nivel de deuda frente a tus recursos
-            </span>
-          </div>
-        </Button>
+      <DialogTrigger>
+        <CalculatorButton title="Calculadora de Apalancamiento" description="Calcula los grados de apalancamiento de tu empresa" icon={TrendingUp} />
       </DialogTrigger>
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         <div className="w-full">

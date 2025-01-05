@@ -20,6 +20,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { PieChart as Pie_Chart } from "lucide-react";
+import { CalculatorButton } from "./CalculatorButton";
 
 export const WaccCalculator = () => {
   const [inputs, setInputs] = useState({
@@ -41,20 +42,8 @@ export const WaccCalculator = () => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="none" className="w-full py-8">
-          <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
-            <Pie_Chart className="w-10 h-10 text-red-600" />
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="text-lg font-bold text-gray-800">
-              Calcular WACC
-            </span>
-            <span className="text-sm text-gray-500">
-              Determina el costo promedio ponderado de capital
-            </span>
-          </div>
-        </Button>
+      <DialogTrigger>
+        <CalculatorButton title="Calcular WACC" description="Analiza el costo promedio ponderado de capital de tu empresa" icon={Pie_Chart} />
       </DialogTrigger>
       <DialogContent className="flex flex-row gap-8 p-8 w-full max-w-6xl min-h-[700px]">
         <div className="w-1/2">

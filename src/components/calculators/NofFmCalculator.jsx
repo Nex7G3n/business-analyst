@@ -22,6 +22,7 @@ import {
   Legend,
 } from "chart.js";
 import { TrendingDown } from "lucide-react";
+import { CalculatorButton } from "./CalculatorButton";
 
 ChartJS.register(
   CategoryScale,
@@ -87,21 +88,8 @@ export const NofFmCalculator = () => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="none" className="w-full py-8">
-          <div className="flex items-center justify-center bg-gray-200 rounded-full p-3">
-            <TrendingDown className="w-10 h-10 text-blue-600" />
-          </div>
-
-          <div className="flex flex-col text-left">
-            <span className="text-lg font-bold text-gray-800">
-              Calcular NOF y FM
-            </span>
-            <span className="text-sm text-gray-500">
-              Calcula las Necesidades Operativas de Fondos y Fondo de Maniobra
-            </span>
-          </div>
-        </Button>
+      <DialogTrigger>
+        <CalculatorButton title="Calculadora de NOF y FM" description="Calcula las Necesidades Operativas de Fondos y Fondo de Maniobra." icon={TrendingDown} />
       </DialogTrigger>
       <DialogContent className="p-6 space-y-6">
         <DialogHeader>
