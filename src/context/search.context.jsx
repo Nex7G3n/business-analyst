@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { getArticles } from "../services/news.service";
-import { getActions } from "@/services/financial.service";
+import { getActions, getBalanceData } from "@/services/financial.service";
 
 const SearchContext = createContext();
 
@@ -21,15 +21,17 @@ export const SearchProvider = ({ children }) => {
     try {
       const articles = await getArticles(query);
       const actions = await getActions(query);
+      const balanceData = await getBalanceData(query);
 
       await setSearchData({ state: "Ok", data: {
         articles: articles,
         actions: actions,
+        balanceData: balanceData.annualReports  
       } });
-
-      console.log("articles", articles);
-      console.log("actions", actions);
-
+      console.log(articles);
+      console.log(actions);
+      console.log(balanceData.annualReports);
+      console.log(searchData);
     } catch (error) {
       setSearchData({ state: "Error", error: error.message });
     }
