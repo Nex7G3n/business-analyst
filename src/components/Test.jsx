@@ -1,5 +1,3 @@
-import React from "react";
-
 const ScrollingText = () => {
   const containerStyle = {
     width: "300px",

@@ -1,5 +1,6 @@
-import * as React from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { useState } from "react"
+
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
 import {
   Card,
@@ -7,34 +8,39 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "../components/ui/card"
 
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
+} from "../components/ui/chart";
 
-import { Skeleton } from "@/components/ui/skeleton"; // Importa el componente Skeleton
-
-export const description = "An interactive bar chart";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useSearch } from "@/context/search.context";
 
 const chartConfig = {
   views: {
     label: "Valor de las acciones",
   },
-  desktop: {
+  open: {
     label: "Apertura",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
+  close: {
     label: "Cierre",
     color: "hsl(var(--chart-2))",
   },
 };
 
-export function Actions({ chartData, loading }) {
-  if (loading) {
+const Actions = () => {
+  const [activeChart, setActiveChart] = useState("open");
+
+  const { searchData } = useSearch();
+
+  if (!searchData || searchData.state === "No Search") return <></> ;
+
+  if (searchData.state === "Loading") {
     return (
       <Card className="w-full">
         <CardHeader>
@@ -48,44 +54,40 @@ export function Actions({ chartData, loading }) {
     );
   }
 
-  if (!chartData) {
-    return null;
-  }
+  if (searchData.state === "Error") return <></>;
 
-  const [activeChart, setActiveChart] = React.useState("desktop");
+  const total = () => ({
+    open: searchData.data.actions.reduce((acc, curr) => acc + curr.open, 0),
+    close: searchData.data.actions.reduce((acc, curr) => acc + curr.close, 0),
+  })
 
-  const total = React.useMemo(
-    () => ({
-      desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
-      mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),
-    }),
-    [chartData]
-  );
 
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Mapa interactivo</CardTitle>
-          <CardDescription>Valor de las acciones</CardDescription>
+          <CardTitle>Bar Chart - Interactive</CardTitle>
+          <CardDescription>
+            Showing total visitors for the last 3 months
+          </CardDescription>
         </div>
         <div className="flex">
-          {["desktop", "mobile"].map((key) => {
+          {["open", "close"].map((chart) => {
             return (
               <button
-                key={key}
-                data-active={activeChart === key}
-                className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
-                onClick={() => setActiveChart(key)}
-              >
-                <span className="text-xs text-muted-foreground">
-                  {chartConfig[key].label}
-                </span>
-                <span className="text-lg font-bold leading-none sm:text-3xl">
-                  {total[key].toLocaleString()}
-                </span>
-              </button>
-            );
+              key={chart}
+              data-active={activeChart === chart}
+              className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+              onClick={() => setActiveChart(chart)}
+            >
+              <span className="text-xs text-muted-foreground">
+                {chartConfig[chart.toString()].label}
+              </span>
+              <span className="text-lg font-semibold">
+                {total()[chart]}
+              </span>
+            </button>
+            )
           })}
         </div>
       </CardHeader>
@@ -96,7 +98,7 @@ export function Actions({ chartData, loading }) {
         >
           <BarChart
             accessibilityLayer
-            data={chartData}
+            data={searchData.data.actions}
             margin={{
               left: 12,
               right: 12,
@@ -110,11 +112,11 @@ export function Actions({ chartData, loading }) {
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
-                const date = new Date(value);
+                const date = new Date(value)
                 return date.toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
-                });
+                })
               }}
             />
             <ChartTooltip
@@ -127,7 +129,7 @@ export function Actions({ chartData, loading }) {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
-                    });
+                    })
                   }}
                 />
               }
@@ -137,5 +139,10 @@ export function Actions({ chartData, loading }) {
         </ChartContainer>
       </CardContent>
     </Card>
-  );
-}
+  )
+};
+
+
+
+
+export default Actions;

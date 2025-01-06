@@ -1,4 +1,3 @@
-import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export function FinancialPieChart({ totalActivo, totalPasivo, capitalPropio, beneficioNeto, activoCorriente, pasivoCorriente, ventasTotales}) {
@@ -12,7 +11,6 @@ export function FinancialPieChart({ totalActivo, totalPasivo, capitalPropio, ben
     { name: 'Ventas Totales', value: parseFloat(capitalPropio) || 0 }
   ];
 
-  // Colores para cada segmento del gráfico de torta
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF6384', '#36A2EB'];
 
   return (
