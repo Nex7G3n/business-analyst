@@ -1,10 +1,5 @@
-import { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-} from "./ui/card";
+import { useState, useEffect } from "react";
+import { Card, CardHeader, CardFooter, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
@@ -19,19 +14,41 @@ import {
 import { Pagination } from "@/components/ui/pagination";
 import { useSearch } from "@/context/search.context";
 
+function ImageWithSkeleton({ src, alt, className, pageKey }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => setIsLoaded(false), [pageKey]);
+
+  return (
+    <div className="relative w-full h-full">
+      {!isLoaded && <Skeleton className="w-full h-40 rounded-md" />}
+      <img
+        src={src}
+        alt={alt}
+        className={`${className} ${!isLoaded ? "hidden" : ""}`}
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setIsLoaded(true)}
+      />
+    </div>
+  );
+}
+
 function News() {
   const [currentPage, setCurrentPage] = useState(1);
   const { searchData } = useSearch();
-  
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchData]);
+
   if (searchData.state === "No Search") return <></>;
-  
+
   const itemsPerPage = 6;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = searchData.data && searchData.data.articles
-    ? searchData.data.articles.slice(indexOfFirstItem, indexOfLastItem)
-    : [];
-  const totalPages = searchData.data && searchData.data.articles
+  const currentItems =
+    searchData.data?.articles?.slice(indexOfFirstItem, indexOfLastItem) || [];
+  const totalPages = searchData.data?.articles?.length
     ? Math.ceil(searchData.data.articles.length / itemsPerPage)
     : 0;
 
@@ -67,14 +84,15 @@ function News() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentItems.map((article, index) => (
           <Card
-            key={index}
+            key={`${currentPage}-${index}`}
             className="hover:shadow-lg transition-shadow duration-300"
           >
             <CardHeader>
-              <img
-                src={article.urlToImage || "ruta/a/imagen/placeholder.jpg"}
+              <ImageWithSkeleton
+                src={article.urlToImage}
                 alt={article.title}
                 className="w-full h-40 object-cover rounded-md"
+                pageKey={`${currentPage}-${index}`}
               />
               <CardTitle>{article.title}</CardTitle>
               <Badge variant="outline">{article.source.name}</Badge>
@@ -88,10 +106,11 @@ function News() {
                   <DialogHeader>
                     <DialogTitle>{article.title}</DialogTitle>
                   </DialogHeader>
-                  <img
-                    src={article.urlToImage || "ruta/a/imagen/placeholder.jpg"}
+                  <ImageWithSkeleton
+                    src={article.urlToImage}
                     alt={article.title}
                     className="w-full h-64 object-cover rounded-md mb-4"
+                    pageKey={`${currentPage}-${index}-dialog`}
                   />
                   <p>{article.content || "Contenido no disponible."}</p>
                   <DialogFooter>
