@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { getArticles } from "../services/news.service";
-import { getActions, getBalanceData } from "@/services/financial.service";
+import { getActions, getBalanceData, getGeneralData } from "@/services/financial.service";
 
 const SearchContext = createContext();
 
@@ -19,11 +19,13 @@ export const SearchProvider = ({ children }) => {
     setSearchData({ state: "Loading" });
     
     try {
+      const generalData = await getGeneralData(query);
       const articles = await getArticles(query);
       const actions = await getActions(query);
       const balanceData = await getBalanceData(query);
 
       await setSearchData({ state: "Ok", data: {
+        general: generalData,
         articles: articles,
         actions: actions,
         balanceData: balanceData.annualReports  
