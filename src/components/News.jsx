@@ -13,8 +13,9 @@ import {
 } from "./ui/dialog";
 import { Pagination } from "@/components/ui/pagination";
 import { useSearch } from "@/context/search.context";
+import PropTypes from "prop-types";
 
-function ImageWithSkeleton({ src, alt, className, pageKey }) {
+const ImageWithSkeleton = ({ src, alt, className, pageKey }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => setIsLoaded(false), [pageKey]);
@@ -31,7 +32,7 @@ function ImageWithSkeleton({ src, alt, className, pageKey }) {
       />
     </div>
   );
-}
+};
 
 function News() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -157,5 +158,12 @@ function News() {
     </div>
   );
 }
+
+ImageWithSkeleton.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  pageKey: PropTypes.string.isRequired,
+};
 
 export default News;
