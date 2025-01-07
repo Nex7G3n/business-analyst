@@ -52,7 +52,7 @@ const CompanyDetails = () => {
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-left">
-      <Card className="w-full bg-white shadow-md rounded-lg xl:col-span-2">
+      <Card className="w-full bg-white rounded-lg xl:col-span-2">
         <CardHeader className="pb-4">
           <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <Globe className="w-6 h-6 text-blue-600" />
@@ -133,7 +133,7 @@ const CompanyDetails = () => {
         </CardContent>
       </Card>
 
-      <Card className="w-full bg-white shadow-md rounded-lg h-full">
+      <Card className="w-full bg-white rounded-lg h-full">
         <CardHeader className="pb-4">
           <CardTitle className="text-xl font-bold text-gray-800 flex items-center gap-2">
             <TrendingUp className="w-6 h-6 text-green-500" />

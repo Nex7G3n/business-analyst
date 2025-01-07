@@ -5,7 +5,7 @@ import CompanyDetails from "@/components/General"
 
 export const EnterprisePage = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       <CompanyDetails />
       <Actions />
       <BalanceFinanciero />
