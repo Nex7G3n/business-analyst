@@ -1,6 +1,6 @@
 # 📊 Dashboard Financiero
 
-**Dashboard Financiero** es una aplicación interactiva creada con **React** para realizar cálculos financieros avanzados y analizar datos relevantes en tiempo real. Ofrece herramientas como el cálculo de ratios financieros, WACC, EVA, análisis de bonos, apalancamiento, entre otros.
+**Dashboard Financiero** es una aplicación interactiva creada con **React** para realizar cálculos financieros avanzados y analizar datos relevantes en tiempo real. Ofrece herramientas como el cálculo de ratios financieros, WACC, EVA, análisis de bonos, apalancamiento, entre otros. Es una herramienta esencial para estudiantes y profesionales de finanzas.
 
 <img src="https://i.ibb.co/Q6qr4Vb/Captura-de-pantalla-2024-11-22-152157.png" alt="Pantalla Principal" width="800"/>
 
